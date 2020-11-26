@@ -8,7 +8,7 @@ I assert copyright on all of my original content here.  I don't see why anyone w
 
 # About me
 
-I am a nerd.  I have a life outside of work that revolves around my family, which I do not discuss in detail online.
+I am a nerd.  I have a life outside of work that revolves around my family that I do not discuss in detail online.
 
 ## Professional biography
 
