@@ -61,7 +61,148 @@ Aside: the above works just fine in WSL as well, but the GPU isn't exposed becau
 
 # Performance
 
-I'll add stuff here later.
+`clpeak` is a nice way to measure the peak memory and compute capability of CPU and GPU devices using an equivalent methodology.
 
+I ran these tests with the Linux governor set for performance ([details](https://askubuntu.com/questions/604720/setting-to-high-performance)).
+
+```sh
+jrhammon@tigerlake:~/clpeak$ echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+performance
+```
+
+```sh
+jrhammon@tigerlake:~/clpeak$ ./clpeak | tee clpeak.log
+
+Platform: Intel(R) OpenCL
+  Device: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz
+    Driver version  : 2020.11.10.0.05_160000 (Linux x64)
+    Compute units   : 8
+    Clock frequency : 2800 MHz
+
+    Global memory bandwidth (GBPS)
+      float   : 32.09
+      float2  : 31.57
+      float4  : 34.14
+      float8  : 28.76
+      float16 : 21.88
+
+    Single-precision compute (GFLOPS)
+      float   : 218.19
+      float2  : 409.03
+      float4  : 407.21
+      float8  : 400.21
+      float16 : 393.09
+
+    No half precision support! Skipped
+
+    Double-precision compute (GFLOPS)
+      double   : 211.05
+      double2  : 203.61
+      double4  : 201.58
+      double8  : 198.51
+      double16 : 86.28
+
+    Integer compute (GIOPS)
+      int   : 75.64
+      int2  : 134.78
+      int4  : 172.68
+      int8  : 88.42
+      int16 : 86.30
+
+    Integer compute Fast 24bit (GIOPS)
+      int   : 58.13
+      int2  : 85.43
+      int4  : 90.68
+      int8  : 89.62
+      int16 : 85.92
+
+    Transfer bandwidth (GBPS)
+      enqueueWriteBuffer              : 14.70
+      enqueueReadBuffer               : 14.85
+      enqueueWriteBuffer non-blocking : 14.68
+      enqueueReadBuffer non-blocking  : 14.82
+      enqueueMapBuffer(for read)      : 59322.75
+        memcpy from mapped ptr        : 14.69
+      enqueueUnmap(after write)       : 52377.65
+        memcpy to mapped ptr          : 14.51
+
+    Kernel launch latency : 1.97 us
+
+Platform: Intel(R) OpenCL HD Graphics
+  Device: Intel(R) Graphics Gen12LP [0x9a49]
+    Driver version  : 20.46.18421 (Linux x64)
+    Compute units   : 96
+    Clock frequency : 1300 MHz
+
+    Global memory bandwidth (GBPS)
+      float   : 32.51
+      float2  : 24.16
+      float4  : 31.49
+      float8  : 32.43
+      float16 : 40.02
+
+    Single-precision compute (GFLOPS)
+      float   : 1413.85
+      float2  : 1410.00
+      float4  : 860.81
+      float8  : 899.68
+      float16 : 753.69
+
+    Half-precision compute (GFLOPS)
+      half   : 2327.97
+      half2  : 2304.86
+      half4  : 2329.34
+      half8  : 1427.09
+      half16 : 1612.55
+
+    No double precision support! Skipped
+
+    Integer compute (GIOPS)
+      int   : 329.21
+      int2  : 238.15
+      int4  : 225.79
+      int8  : 308.19
+      int16 : 260.67
+
+    Integer compute Fast 24bit (GIOPS)
+      int   : 326.83
+      int2  : 235.12
+      int4  : 252.99
+      int8  : 252.23
+      int16 : 256.53
+
+    Transfer bandwidth (GBPS)
+      enqueueWriteBuffer              : 12.41
+      enqueueReadBuffer               : 12.48
+      enqueueWriteBuffer non-blocking : 10.37
+      enqueueReadBuffer non-blocking  : 10.18
+      enqueueMapBuffer(for read)      : 4294959.00
+        memcpy from mapped ptr        : 12.43
+      enqueueUnmap(after write)       : inf
+        memcpy to mapped ptr          : 12.43
+
+    Kernel launch latency : 26.90 us
+
+```
+
+
+# Hardware details
+
+The wireless hardware that Ubuntu 20.04 doesn't support is:
+```
+$ sudo lshw -C network
+  *-network                 
+       description: Wireless interface
+       product: Wi-Fi 6 AX201
+       vendor: Intel Corporation
+       physical id: 14.3
+       logical name: wlp0s20f3
+       version: 20
+       serial: *
+       width: 64 bits
+       clock: 33MHz
+       capabilities: pm msi pciexpress msix bus_master cap_list ethernet physical wireless
+       configuration: broadcast=yes driver=iwlwifi driverversion=5.8.0-29-generic firmware=55.d9698065.0 ip=* latency=0 link=yes multicast=yes wireless=IEEE 802.11
+```
 
 (c) Copyright Jeff Hammond, 2020.  No reuse permitted except by permission from the author.
