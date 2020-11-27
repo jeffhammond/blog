@@ -91,6 +91,10 @@ After the necessary reboot, I saw the Ubuntu boot menu, which defaults to Ubuntu
 
 Because I am a luddite, I installed all the things I wanted with Apt in Terminal.  The apps I install everywhere include the Chrome browser, the latest versions of GCC and LLVM, and associated development tools like Git, Vim, Valgrind and CMake (yes, I hate CMake but it's a necessary evil).
 
+# Comparison to past experiences
+
+I've been a Dell Linux laptop user for many years, since 2005 or so.  In the past, I would install OpenSUSE because it seemed to have the best driver support and wouldn't even think the fact that Windows was there, although I recall the horrors of ndiswrapper in cases where my wireless chip didn't permit native Linux drives.  Things are different now, mostly in good ways, although BIOS security features and SecureBoot mean that nuking Windows requires slightly more work.  As noted already, I am keeping Windows 10 around in a dual-boot configuration just in case I need it to update the firmware or something like that.
+
 # Installing oneAPI
 
 Because the motivation for getting this machine was to evaluate the developer experience of oneAPI on a Tiger Lake laptop, I installed oneAPI and other Intel GPU software.  Fortunately, both support Apt and the process is trivial.  Since the details are documented elsewhere, I will merely link to those:
@@ -101,6 +105,16 @@ Because the motivation for getting this machine was to evaluate the developer ex
 Aside: the above works just fine in WSL as well, but the GPU isn't exposed because the driver support isn't there yet.
 
 # Performance
+
+## Practical
+
+The other computers on my desk right now are a Macbook Pro circa 2018-2019 and a Hades Canyon NUC.  The Tiger Lake laptop feels noticeably faster than the NUC even though the NUC has a higher power envelope and frequency ceiling.  I'm not sure whether this is real or not, and if it's real, how it correlates with the processor, memory, or SSD capability. 
+
+I can't really compare the Mac laptop because it is burdened with corporate IT bloatware like Microsoft Outlook that I unfortunately have to run all the time.  I've mostly given up on building software natively on MacOS because Apple refuses to let me program the GPU in a sensible manner (their OpenCL is decent for a 1.x implementation, but that's not saying much).
+
+The other thing I like about this laptop is that it cost less than $800.  My Macbook Pro cost around $3000 and while it has twice the SSD and more memory (16 vs 12), it's not faster than the cheaper one, and certainly not anywhere near four times faster.  I see that I can get a similarly provisioned Mac laptop with the new M1 procesor in it for *only* twice the cost of my Dell.  While people on Twitter tell me that the M1 is seventy bazillion times better than every other processor ever made, I am very happy with the performance and the battery life on the Dell, particularly for the price.
+
+## Raw
 
 `clpeak` is a nice way to measure the peak memory and compute capability of CPU and GPU devices using an equivalent methodology.
 
@@ -225,7 +239,6 @@ Platform: Intel(R) OpenCL HD Graphics
     Kernel launch latency : 26.90 us
 
 ```
-
 
 # Hardware details
 
