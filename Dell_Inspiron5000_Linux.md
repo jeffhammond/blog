@@ -10,9 +10,50 @@ I was not compensated by anyone to write this, but I work for Intel and thus you
 
 # What's in the box?
 
-I'll include the details specs later...
-
 The box contains a laptop, the power cable and the trivial paperwork.  That's it.  There was minimal plastic (sleeves around each item) and the cardboard appears to be recycled.
+
+Here are some hardware details if you care:
+```sh
+$ sudo lshw 
+tigerlake                   
+    description: Notebook
+    product: Inspiron 5402 (0A01)
+    vendor: Dell Inc.
+    serial: *
+    width: 64 bits
+    capabilities: smbios-3.2.0 dmi-3.2.0 smp vsyscall32
+    configuration: boot=normal chassis=notebook family=Inspiron sku=0A01 
+  *-core
+       description: Motherboard
+       product: 0MF3C8
+       vendor: Dell Inc.
+       physical id: 0
+       version: A00
+       serial: *
+     *-firmware
+          description: BIOS
+          vendor: Dell Inc.
+          physical id: 0
+          version: 1.1.5
+          date: 09/22/2020
+          size: 1MiB
+          capacity: 32MiB
+          capabilities: pci pnp upgrade shadowing cdboot bootselect edd int5printscreen int9keyboard int14serial int17printer acpi usb smartbattery biosbootspecification netboot uefi
+     *-cpu
+          description: CPU
+          product: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz
+          vendor: Intel Corp.
+          physical id: 400
+          bus info: cpu@0
+          version: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz
+          slot: CPU 1
+          size: 1274MHz
+          capacity: 4700MHz
+          width: 64 bits
+          clock: 100MHz
+          capabilities: lm fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp x86-64 constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l2 invpcid_single cdp_l2 ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves split_lock_detect dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid movdiri movdir64b fsrm avx512_vp2intersect md_clear flush_l1d arch_capabilities cpufreq
+          configuration: cores=4 enabledcores=4 threads=8
+```
 
 # Booting for the first time
 
