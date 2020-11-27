@@ -1,6 +1,6 @@
 # Summary
 
-This post describes my experience getting Linux installed on a Dell Inspiron 5000 laptop with the latest (as of 2020) Intel processor, known as Tiger Lake.
+This post describes my experience getting Linux installed on a [Dell Inspiron 5000 laptop](https://www.dell.com/en-us/member/shop/dell-laptops/new-inspiron-14-5000-laptop/spd/inspiron-14-5402-laptop/nn5402ejobh) with the latest (as of 2020) Intel processor, known as Tiger Lake.
 
 **TL;DR** Turn of BitLocker, install Ubuntu 20.10 (not 20.04!), and repartition the drive to dual-boot Linux alongside Windows 10.  Everything works nicely.
 
@@ -112,7 +112,7 @@ The other computers on my desk right now are a Macbook Pro circa 2018-2019 and a
 
 I can't really compare the Mac laptop because it is burdened with corporate IT bloatware like Microsoft Outlook that I unfortunately have to run all the time.  I've mostly given up on building software natively on MacOS because Apple refuses to let me program the GPU in a sensible manner (their OpenCL is decent for a 1.x implementation, but that's not saying much).
 
-The other thing I like about this laptop is that it cost less than $800.  My Macbook Pro cost around $3000 and while it has twice the SSD and more memory (16 vs 12), it's not faster than the cheaper one, and certainly not anywhere near four times faster.  I see that I can get a similarly provisioned Mac laptop with the new M1 procesor in it for *only* twice the cost of my Dell.  While people on Twitter tell me that the M1 is seventy bazillion times better than every other processor ever made, I am very happy with the performance and the battery life on the Dell, particularly for the price.
+The other thing I like about this laptop is that it cost around $800.  My Macbook Pro cost around $3000 and while it has twice the SSD and more memory (16 vs 12), it's not faster than the cheaper one, and certainly not anywhere near four times faster.  I can get a similarly provisioned Mac laptop with the new M1 procesor in it for *only* twice the cost of my Dell.  While people on Twitter tell me that the M1 is seventy bazillion times better than every other processor ever made, I am very happy with the performance and the battery life on the Dell, particularly for the price.  Also, my name is not Jon Masters and I do not love ARM processors *that* much.
 
 ## Raw
 
