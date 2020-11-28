@@ -1,4 +1,4 @@
-This was originally part of [Mentoring_Interns.md](Mentoring_Interns.md) and some of the CSGF references are explained in [Career_Trajectory.md](Career_Trajectory.md), although I will eventually write a post dedicated to CSGF.
+This was originally part of [Mentoring Interns](Mentoring_Interns.md) and some of the CSGF references are explained in [Career Trajectory](Career_Trajectory.md), although I will eventually write a post dedicated to CSGF.
 
 # The Summer of 2011
 
