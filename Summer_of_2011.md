@@ -4,7 +4,7 @@ This was originally part of [Mentoring Interns](Mentoring_Interns.md) and some o
 
 I've been asked about this before, so I might as well write it down here.  In the summer of 2010, I had started talking to Devin Matthews and Edgar Solomonik about doing their DOE-CSGF practica (i.e. internships) with me at Argonne.  At the time, Edgar was a student of Jim Demmel's at Berkeley, working on efficient algorithms for matrix computations.  Devin was a chemistry graduate student at Texas wtih John Stanton, working on efficient formulations of coupled-cluster theory and their applications to spectroscopy.
 
-Edgar and I came up with a plan to do smoething related to dynamic load-balancing in quantum chemistry, which was closer to his undergraduate research with Sanjay Kale in the Charm++ group.  The idea was to add better task scheduling to MPQC, which was a C++ code that did some of the same things as NWChem, but was a lot simpler to get working on Blue Gene/P.
+Edgar and I came up with a plan to do something related to dynamic load-balancing in quantum chemistry, which was closer to his undergraduate research with Sanjay Kale in the Charm++ group.  The idea was to add better task scheduling to [MPQC](https://mpqc.org/), which was a C++ code that did some of the same things as NWChem, but was a lot simpler to get working on Blue Gene/P.
 
 Devin's project was going to be something that would expose him to more modern programming methods, since his work at Texas involved [CFOUR](http://www.cfour.de/), which is the closest thing to a genuine Fortran 77 code as I have ever seen.  Given Devin's experience with CFOUR, I figured we'd learn Fortran 95 together, and do something interesting along the way.
 
