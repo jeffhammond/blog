@@ -28,4 +28,5 @@ If you want to know more about this project, please read the following:
 * [Cyclops Tensor Framework: reducing communication and eliminating load imbalance in massively parallel contractions
 ](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2012/EECS-2012-210.html) - The second paper.
 * [A massively parallel tensor contraction framework for coupled-cluster computations](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2014/EECS-2014-143.html) - The third paper.
-* [CTF on GitHub](https://github.com/cyclops-community/ctf)
+
+[CTF on GitHub](https://github.com/cyclops-community/ctf) has references to additional applications and publications.
