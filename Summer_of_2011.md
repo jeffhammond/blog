@@ -1,3 +1,5 @@
+This was originally part of [Mentoring_Interns.md](Mentoring_Interns.md) and some of the CSGF references are explained in [Career_Trajectory.md](Career_Trajectory.md), although I will eventually write a post dedicated to CSGF.
+
 # The Summer of 2011
 
 I've been asked about this before, so I might as well write it down here.  In the summer of 2010, I had started talking to Devin Matthews and Edgar Solomonik about doing their DOE-CSGF practica (i.e. internships) with me at Argonne.  At the time, Edgar was a student of Jim Demmel's at Berkeley, working on efficient algorithms for matrix computations.  Devin was a chemistry graduate student at Texas wtih John Stanton, working on efficient formulations of coupled-cluster theory and their applications to spectroscopy.
