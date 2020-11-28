@@ -19,3 +19,13 @@ We met in a conference room around the first week of June and I sketched out the
 By the time I got back to the lab in July, they had solved the problem.  They hadn't implemented everything yet, but the ideas were all there.  Edgar created the [Cyclops Tensor Framework](https://solomon2.web.engr.illinois.edu/ctf/) (CTF) and Devin wrote what would become [AQUARIOUS](https://github.com/devinamatthews/aquarius).  Devin wrote CCSD and CCSDT using CTF, and along the way created a prototype of a Cholesky-decomposition based SCF code.  The CCSD and CCSDT codes based on CTF were faster than the NWChem TCE, which was at the time the highest performance massively parallel implementaiton of those methods.  Furthermore, CTF was based entirely on simple MPI primitives that were highly optimized on every supercomputer, which ensured portable parallel performance without any special effort, which has never been true of NWChem because of its reliance on one-sided communication.
 
 Once CTF was published, it became the new standard for other researchers to beat.  Some have improved on CTF by improving the design, but the core idea that tensor contractions, even ones involving highly symmetric tensors, can and should be done using communication-optimal matrix algorithms combined with collective tensor transposes.  Furthermore, CTF showed that no code generation is required and that all of the operations of coupled-cluster theory, even higher-order methods like CCSDTQ, can be expressed in simple notation that translates efficiently to a small number of back-end functions.
+
+# Details
+
+If you want to know more about this project, please read the following:
+* [An Overview of Cyclops Tensor Framework](https://solomonik.cs.illinois.edu/talks/molssi-monterey-may-2017.pdf) - Edgar's overview slides.
+* [A preliminary analysis of Cyclops Tensor Framework](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2012/EECS-2012-29.html) - The first paper.
+* [Cyclops Tensor Framework: reducing communication and eliminating load imbalance in massively parallel contractions
+](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2012/EECS-2012-210.html) - The second paper.
+* [A massively parallel tensor contraction framework for coupled-cluster computations](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2014/EECS-2014-143.html) - The third paper.
+* [CTF on GitHub](https://github.com/cyclops-community/ctf)
