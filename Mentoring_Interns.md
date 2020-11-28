@@ -1,14 +1,14 @@
 # Summary
 
-I've supervisor more than twenty interns, all of whom were succesful as interns and are -- as best I can tell -- successful in their careers.  This post summarizes my approach to mentoring, which boils down to (1) hire people then find projects that suite them, not the other way way around, and (2) do whatever it takes to make your interns successful, whether that means leaving them alone or sitting with them an hour or two a day.
+I've supervised more than twenty interns, all of whom were succesful as interns and are -- as best I can tell -- successful in their careers.  This post summarizes my approach to mentoring, which boils down to (1) hire people then find projects that suite them, not the other way way around, and (2) do whatever it takes to make your interns successful, whether that means leaving them alone or sitting with them an hour or two a day.
 
 # Hiring
 
-I have hired 100% of the students who wanted to work for me or who were recommended to me, along with a number of others who I recruited because they had skills and interests that were aligned with my research activities.  As I have never declined to hire an applicant, even an unofficial one, I have no idea to do intern selection.  What I can offer is my experience that everyone who wants to contribute can do so, given the right support, and it's up to the mentor to provide this.  If you are not up to the challenge of making your interns successful no matter what, maybe you aren't ready to be a mentor.
+I have hired 100% of the students who wanted to work for me or who were recommended to me, along with a number of others who I recruited because they had skills and interests that were aligned with my research activities.  As I have never declined to hire an applicant, even an unofficial one, I have no idea how to do intern selection.  What I can offer is my experience that everyone who wants to contribute can do so, given the right support, and it's up to the mentor to provide this.  If you are not up to the challenge of making your interns successful no matter what, maybe you aren't ready to be a mentor.
 
 # Selecting a project
 
-It helps to have a rough idea of something you and your intern will do together (and various administrative functions often require it), but the details should be late binding and you should always been open to changing directions even circumstances require.  I'll give an example of this later.
+It helps to have a rough idea of something you and your intern will do together (and various administrative functions often require it), but the details should be late binding and you should always been open to changing directions even circumstances require.  I'll give an example of this later (it's in [Summer of 2011](Summer_of_2011.md)).
 
 # Defining success
 
