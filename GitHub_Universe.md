@@ -2,7 +2,7 @@
 
 This blog post accompanies my GitHub Universe video presentation on oneAPI.  I am going to continue to add stuff over the next week so if you find the current state incomplete, you might find it improves on its own.  Alternatively, feel free to contact me to ask for the content you want to see.
 
-* email: it's on my GitHub [home page](https://jeffhammond.github.io/))
+* email: it's on my GitHub [home page](https://jeffhammond.github.io/)
 * tweet: [science_dot](https://twitter.com/science_dot)
 * issue: create a GitHub issue against this repo to ask a question.  
 
