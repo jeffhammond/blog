@@ -25,3 +25,5 @@ The grading criteria I used for interns was as follows:
 I didn't enumerate these criteria to every intern, but I had them in mind when I was designing their projects.  I'm not sure how other mentors do it, but I like to think that it's somewhat novel to think about 1 and 3, and work really hard to make sure that every intern gets to 1 as quickly as possible, and hopefully to 2.
 
 And if you are wondering, yes, my some of my students hit level 3.  The work some of them did, often with very little help from me, changed their field of science and they are deservedly famous for it.  At one point in my career, I spent a lot of time working on tensor-related things, but I found that some of my former interns are so much better at this topic than I am that I stopped working on it and found new areas to which I can contribute.
+
+(c) Copyright Jeff Hammond, 2020. No reuse permitted except by permission from the author.
