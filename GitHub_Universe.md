@@ -66,3 +66,7 @@ TODO
 # Questions and Answers
 
 I'll add answers to any questions I receive.  If you ask a question in a public forum, I'll cite that, otherwise I will not attribute your question unless you specifically request it.
+
+# License
+
+(c) Copyright Jeff Hammond, 2020. CC BY 4.0 license.  See https://creativecommons.org/licenses/by/4.0/ for details.
