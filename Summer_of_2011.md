@@ -30,3 +30,5 @@ If you want to know more about this project, please read the following:
 * [A massively parallel tensor contraction framework for coupled-cluster computations](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2014/EECS-2014-143.html) - The third paper.
 
 [CTF on GitHub](https://github.com/cyclops-community/ctf) has references to additional applications and publications.
+
+(c) Copyright Jeff Hammond, 2020. No reuse permitted except by permission from the author.
