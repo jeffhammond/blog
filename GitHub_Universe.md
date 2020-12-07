@@ -1,6 +1,6 @@
 # Summary
 
-This blog post accompanies my GitHub Universe video presentation on oneAPI.  I am going to continue to add stuff over the next week so if you find the current state incomplete, you might find it improves on its own.  Alternatively, feel free to contact me to ask for the content you want to see.
+This blog post accompanies my GitHub Universe video presentation on oneAPI (see [Embrace the accelerated, cross-architecture era - upstream and downstream](https://universe.intel.com/) if you happen to come here first).  I am going to continue to add stuff over the next week so if you find the current state incomplete, you might find it improves on its own.  Alternatively, feel free to contact me to ask for the content you want to see.
 
 * email: it's on my GitHub [home page](https://jeffhammond.github.io/)
 * tweet: [science_dot](https://twitter.com/science_dot)
