@@ -4,7 +4,7 @@ Talking to computers is different than talking to humans for a bunch of reasons,
 
 # Context
  
-Professor [Jeffery Brown](https://www.linkedin.com/in/jeffery-brown-a14b8430/) has a [video](https://youtu.be/illApgaLgGA) on how to gain language proficiency.  He puts a lot of emphasis on the difference between the words "acquire" and "learn", which I dislike.  What he's really saying is, natural/organic/immersive language education is superior to formal, grammar-oriented language education.  I agree with this, but am going to use the word "learn" and just focus on the right way to learn, without trying to associate it with a new term.
+Professor [Jeffery Brown](https://www.linkedin.com/in/jeffery-brown-a14b8430/) has a [video](https://youtu.be/illApgaLgGA) on how to gain language proficiency.  He puts a lot of emphasis on the difference between the words "acquire" and "learn", which I dislike.  What he's really saying is, natural/organic/immersive language education is superior to formal, grammar-oriented language education.  I agree with this, but I don't know why we can't call it "learning naturally".
 
 Some of the key ideas in Professor Brown's video are:
 
@@ -13,11 +13,24 @@ Some of the key ideas in Professor Brown's video are:
   3. When beginning to learn a language, focus on listening.  Listen to someone who is fluent speak.  You should look for a "language parent" that serves a similar role to the parent of a baby learning a language.
   4. Only study grammar when you are fluent in the language.
   
-# My Experience
+Professor Brown espouses the [natural approach](https://en.wikipedia.org/wiki/Natural_approach) of Krashen and Terrell, which is widely used today.  I recognize the methods from my German classes in high school, which would have been a lot more effective if I had not been utterly lazy.
+  
+# Learning Fortran
 
 My first experience becoming proficient in a programming language when I was an intern at PNNL in 2006 ([details](https://github.com/jeffhammond/blog/blob/main/Career_Trajectory.md#doe-csgf-and-pnnl)), when I started working on NWChem, which is written primarily in old-school Fortran (I will define this later).  At the time, I had never written any Fortran and I was unable to modify existing programs, which represents 0% fluency.  I was familiar with Fortran-style loops from Matlab programming, but Matlab is much simpler than Fortran for a bunch of reasons.
 
+It has been a little over 14 years, but I'm pretty sure the first thing I had to do as an intern was modify https://github.com/nwchemgit/nwchem/blob/master/src/tce/tce_energy.F, which is an 11K-line subroutine.  Back then, it was probably twice as long, but I refactored it for my own sanity after a year or two of experience.  The first thing I remember was trying to compile my modifications and getting an unhelpful error (compiler error messages weren't great in those days).  I asked the only other person in the room at the time, and [he](https://scholar.google.com/citations?user=1w1T9HYAAAAJ&hl=en) said "you need to indent six spaces.  It seemed arbitrary to me, but it worked.  So the first thing I learned about Fortran was: indent six spaces.
 
+During that summer and in the years to follow, I wrote thousands of lines of Fortran.  What I have never done in all my years as a programmer are (1) take a course on Fortran programming or (2) engage in any serious study of Fortran grammar.  While I own at least three books on Fortran, none of them have been even the slighest bit useful to me.  I will admit that I have referenced Fortran documentation on the internet from time to time, especially regarding formatted I/O, the primary methods I used to become proficient in Fortran are:
+
+  1. Reading code.
+  2. Writing code and seeing if it (a) compiles and (b) does the thing I want it to do.
+  
+I recognized that these behaviors are very similar to the language acquisition noted above.  While I was recompiling NWChem with my latest modifications -- a multi-hour process until I understood the build system and header files better -- I would read the rest of the code, and a lot of other code, too.  **The first key point here is that reading code is hugely important but not something I see practiced much.**  Programmers love to point out everything that is wrong with code that already exists and don't seem to see the value in learning from imperfect code.  Babies learn to speak the language used at home even when their parent(s) do not speak properly.  NWChem is full of of kinds of Fortran but it wasn't hard to figure out the difference between good and bad style from its inherent comprehensibility.
+
+The second thing I learned to do is stop looking up answers and just answer questions experimentally.  You know those Twitter polls asking "without testing it, is this code (a) correct, (b) undefined behavior, (c) blah blah, (d) show me results"?  I hate them with the burning passion of [VY Canis Majoris](https://en.wikipedia.org/wiki/VY_Canis_Majoris).  I guess those polls are for ISO language lawyers and compiler developers, but they are useless to me.  I care about what works, and if something gives me the right answer and passes strict compiler checking and sanitizers, that's all I need to know.  Over the years, I've kept a [programmer diary](https://github.com/jeffhammond/HPCInfo) of random tests I've written to see what works.  Many of those tests involve things that aren't covered by one of those ISO-blessed APIs anyways, and when it comes to what vendors ship on exotic supercomputers, the only thing that matters is what produces the correct results (vendor documentation is rarely perfect).
+
+It turns out that this is how babies learn to speak.  My kids didn't read a book to know how to ask for food.  Toddlers emit semi-random sounds until they get what they want, and over time, they get better at it.  They get a banana and I get `$?==0`. 
 
 # Appendix
 
