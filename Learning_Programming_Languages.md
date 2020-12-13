@@ -32,6 +32,12 @@ The second thing I learned to do is stop looking up answers and just answer ques
 
 It turns out that this is how babies learn to speak.  My kids didn't read a book to know how to ask for food.  Toddlers emit semi-random sounds until they get what they want, and over time, they get better at it.  They get a banana and I get `$?==0`. 
 
+# Learning C
+
+Later in grad school, I tried to learn C.  It turns out this is rather hard coming from Fortran, because Fortran passes everything by reference, and C passes everything by value, I spent a lot of time during my first year with C wondering why I could modify `a` with `void foo(int)`.  But eventually I learned, not because I read the Kernighan and Ritchie book or [ISO/IEC 9899](http://www.iso-9899.info/wiki/The_Standard) but because I read thousands of lines of C code that I was able to determine was some form of good.  For example, [PSI](https://psicode.org/) isn't perfect -- it was created by a bunch of [3+ star programmers](https://wiki.c2.com/?ThreeStarProgrammer) -- but it was a lot better than the C I knew how to write at the time, and working C is better than C that either doesn't work or doesn't exist.
+
+# Learning Java
+
 # Appendix
 
 This is unnecessary detail but if you are the type of person who reads my blog posts, particularly ones about computer language acquisition, you might be the type of person who cares about unnecessary details.
