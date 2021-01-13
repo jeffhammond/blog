@@ -36,6 +36,9 @@ For each compute module, do this:
   
 I used Ubuntu's `Disks` GUI app but one can of course use `dd` instead.
 
+[This](https://synyx.de/blog/turing-pi-the-ultimate-cluster-board-for-raspis/) appears to be another good description
+of the setup process, with more automation.  You might find that more useful than mine.
+
 # Getting Started
 
 I was dumb and initially only imaged one compute module.
