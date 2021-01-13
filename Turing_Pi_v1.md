@@ -32,7 +32,7 @@ First, move the jumper next to the MicroUSB port to `flash` instead of `boot`.  
 For each compute module, do this:
 
   * Run `sudo ./rpiboot` in a terminal to mount the eMMC storage.
-  * Write the image to it.
+  * Write the image to it.  This takes about 10 minutes.
   
 I used Ubuntu's `Disks` GUI app but one can of course use `dd` instead.
 
