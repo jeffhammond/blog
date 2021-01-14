@@ -47,3 +47,27 @@ e.g. I saw multiple hangs and even when I went back to the pure terminal, the gr
 This isn't too surprising, but given that I have a pretty good time with Ubuntu 20 and Gnome
 on my Raspberry Pi 4, 
 I subsequently uninstalled Gnome and will only use these things via SSH from a more powerful system.
+
+After imaging all of the modules, I see all of the node IP addresses in my router and with `nmap`.
+I used `pdsh` to make Apt changes symmetrically.
+
+# Running HPC Workloads
+
+## NWChem
+
+### Install
+
+NWChem is part of the Debian/Ubuntu package manager:
+```
+apt install nwchem
+```
+While the binary is not built optimally, it's good enough to start.
+Building NWChem is not trivial either in human time or execution time of the build -- using a pre-built binary saves a lot of time, although this is eventually offset by increased execution time of the application itself.
+
+### Launch
+
+After doing all the necessary SSH things, including passwordless SSH keys and `~/.ssh/knownhosts`, one can use Open-MPI 4.0.3 (from Apt) to run jobs.  Test your MPI installing by running `hostname`.
+
+```
+$ /usr/bin/mpirun.openmpi --host turing0:4,turing1:4,turing2:4,turing3:4,turing4:4,turing5:4 /usr/bin/nwchem w9_b3lyp_6-31G_energy.nw 
+```
