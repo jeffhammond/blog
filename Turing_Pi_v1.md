@@ -53,6 +53,51 @@ I used `pdsh` to make Apt changes symmetrically.
 
 # Running HPC Workloads
 
+## MPI
+
+Open-MPI is much more reliable at launching processes on the Turing Pi.
+The following just works.
+```
+$ mpicc.openmpi -g -Os hello.c -o hello.x && pdsh -R exec -w turing[1-5] ssh -l ubuntu %h scp turing0:/tmp/hello.x /tmp/hello.x && /usr/bin/mpirun.openmpi --host turing0:4,turing1:4,turing2:4,turing3:4,turing4:4,turing5:4 /tmp/hello.x
+```
+
+The following does not work.
+```
+$ mpicc.mpich -g -Os hello.c -o hello.x && pdsh -R exec -w turing[1-5] ssh -l ubuntu %h scp turing0:/tmp/hello.x /tmp/hello.x && /usr/bin/mpirun.mpich --host turing0:4,turing1:4,turing2:4,turing3:4,turing4:4,turing5:4 /tmp/hello.x
+```
+
+Eventually, I had to change `~/.ssh/config` to use the key by default and just use the raw IP addresses.
+I don't know for sure, but it seems like a DNS issue (https://isitdns.com/).
+```
+$ mpicc.mpich -g -Os hello.c -o hello.x && pdsh -R exec -w turing[1-5] ssh -l ubuntu %h scp turing0:/tmp/hello.x /tmp/hello.x && /usr/bin/mpirun.mpich -launcher ssh --host 192.168.1.23:4,192.168.1.24:4,192.168.1.25:4,192.168.1.26:4,192.168.1.27:4,192.168.1.28:4 /tmp/hello.x
+```
+
+### MPI `hello.c` (in case you need it)
+```c
+#include <stdio.h>
+#include <mpi.h>
+
+int main(int argc, char** argv)
+{
+    MPI_Init(&argc, &argv);
+
+    int np;
+    MPI_Comm_size(MPI_COMM_WORLD, &np);
+
+    int me;
+    MPI_Comm_rank(MPI_COMM_WORLD, &me);
+
+    int name_len; //unused
+    char name[MPI_MAX_PROCESSOR_NAME];
+    MPI_Get_processor_name(name, &name_len);
+    printf("Hello from processor %s, rank %d out of %d processors\n", name, me, np);
+
+    MPI_Finalize();
+
+    return 0;
+}
+```
+
 ## NWChem
 
 ### Install
@@ -70,4 +115,11 @@ After doing all the necessary SSH things, including passwordless SSH keys and `~
 
 ```
 $ /usr/bin/mpirun.openmpi --host turing0:4,turing1:4,turing2:4,turing3:4,turing4:4,turing5:4 /usr/bin/nwchem w9_b3lyp_6-31G_energy.nw 
+```
+
+## More NWChem
+
+This is WIP.  I am still debugging the NWChem build...
+```
+$ /usr/bin/mpirun.mpich -launcher ssh --host 192.168.1.23:4,192.168.1.24:4,192.168.1.25:4,192.168.1.26:4,192.168.1.27:4,192.168.1.28:4 /tmp/nwchem w9_b3lyp_6-31G_energy.nw
 ```
