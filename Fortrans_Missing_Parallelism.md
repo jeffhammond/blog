@@ -39,7 +39,7 @@ program main
 end program main
 ```
 
-Assuming that `yksi`, `kaksi`, `kolme` are share no state (which isn't isn't visible in this program, if it exists), then
+Assuming that `yksi`, `kaksi`, `kolme` share no state (which isn't visible in this program, if it exists), then
 all three functions can execute concurrently.
 
 How would we implement this in Fortran 2018?
@@ -71,7 +71,7 @@ While this works, this approach has many shortcomings.
 First, there is no way to share data directly between images - data must be explicitly copied using coarray operations.
 Second, images exist throughout the lifetime of the program (unless they fail) and thus the amount of parallelism
 is restricted to what is specified at runtime.
-Third, if there many functions that can execute concurrently,
+Third, if there are many functions that can execute concurrently,
 many more than the number of images (which are likely to be processor cores or similar),
 then either the system will be oversubscribed or the user needs to implement scheduling by hand.
 Dynamic load-balancing is nontrivial and should not be delegated to application programmers in most cases.
@@ -252,7 +252,7 @@ program main
 end program main
 ```
 It might make sense to have a new locality specifier, `local_final` but since there might have
-been a reason by that was not added for `DO CONCURRENT`, we use the `shared` specifier to the
+been a reason why that was not added for `DO CONCURRENT`, we use the `shared` specifier to the
 result of this function.
 
 ## Dependencies
@@ -262,6 +262,7 @@ For example, in our program, we can add a fourth function `nalja` that depends o
 `yksi` and `kaksi`.
 ```fortran
 program main
+  use iso_fortran_env, only : task_depend_kind
   implicit none
   real :: A(100), B(100), C(100)
   real :: RA, RB, RC, RD
