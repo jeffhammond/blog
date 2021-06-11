@@ -13,9 +13,10 @@ The third form of parallelism is shared-memory task parallelism, which supports 
 
 The reader may wish to consult the following for additional context on this topic:
   * _Patterns for Parallel Programming_ by Timothy G. Mattson, Beverly Sanders and Berna Massingill
-  * _OpenMP	Tasking Explained_ by Ruud	van	der	Pas ([Slides](https://openmp.org/wp-content/uploads/sc13.tasking.ruud.pdf))
-  * _The Problem with Threads_ by Edward A. Lee ([Paper](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-1.pdf))
   * _Task Parallelism By Example_ from the Chapel Project ([Slides](https://chapel-lang.org/tutorials/SC14/SC14-4-Chapel-TaskPar.pdf))
+  * _OpenMP	Tasking Explained_ by Ruud	van	der	Pas ([Slides](https://openmp.org/wp-content/uploads/sc13.tasking.ruud.pdf))
+  * _OpenMP	Tasking_ by Christian Terboven and Michael Klemm ([Slides](https://www.openmp.org/wp-content/uploads/sc15-openmp-CT-MK-tasking.pdf))
+  * _The Problem with Threads_ by Edward A. Lee ([Paper](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-1.pdf))
 
 ## Motivating Example
 
@@ -181,3 +182,133 @@ program main
   print*,RA+RB+RC
 end program main
 ```
+
+## Non-trivial data issues
+
+Obviously, very few programs can exploit concurrency where all data is strictly private.
+In `DO CONCURRENT`, locality specifiers are used to inform the implementation about
+whether data is shared, etc.
+(See [this](https://developer.nvidia.com/blog/accelerating-fortran-do-concurrent-with-gpus-and-the-nvidia-hpc-sdk/)
+or [this](https://software.intel.com/content/www/us/en/develop/documentation/fortran-compiler-oneapi-dev-guide-and-reference/top/language-reference/a-to-z-reference/c-to-d/do-concurrent.html) for details.)
+
+Below we modify our program as if each function used a private scratch buffer.
+This is not the best way to allocate X, since X could be defined inside of the
+`task_block` scope or inside of the external function, but this is just an illustration of the syntax.
+We also add T, which could be a read-only lookup table, for example.
+```fortran
+program main
+  implicit none
+  real :: A(100), B(100), C(100)
+  real :: X(10)
+  real :: T(1000)
+  real :: RA, RB, RC
+  real :: yksi, kaksi, kolme
+  external :: yksi, kaksi, kolme
+  
+  task_block local(X) shared(T)
+  RA = yksi(A,X)
+  end task_block
+  
+  task_block local(X) shared(T)
+  RB = kaksi(B,X)
+  end task_block
+  
+  task_block local(X) shared(T)
+  RC = kolme(C,X)
+  end task_block
+  
+  task_sync all
+  
+  print*,RA+RB+RC
+end program main
+```
+
+Much like `DO CONCURRENT`, we should be able to write a fully explicit version using `default(none)`.
+```fortran
+program main
+  implicit none
+  real :: A(100), B(100), C(100)
+  real :: X(10)
+  real :: T(1000)
+  real :: RA, RB, RC
+  real :: yksi, kaksi, kolme
+  external :: yksi, kaksi, kolme
+  
+  task_block local_init(A) shared(RA) local(X) shared(T)
+  RA = yksi(A,X)
+  end task_block
+  
+  task_block local_init(B) shared(RB) local(X) shared(T)
+  RB = kaksi(B,X)
+  end task_block
+  
+  task_block local_init(C) shared(RC)  shared(T)
+  RC = kolme(C,X)
+  end task_block
+  
+  task_sync all
+  
+  print*,RA+RB+RC
+end program main
+```
+It might make sense to have a new locality specifier, `local_final` but since there might have
+been a reason by that was not added for `DO CONCURRENT`, we use the `shared` specifier to the
+result of this function.
+
+## Dependencies
+
+Many applications where task parallelism will be used have dependencies between tasks.
+For example, in our program, we can add a fourth function `nalja` that depends on
+`yksi` and `kaksi`.
+```fortran
+program main
+  implicit none
+  real :: A(100), B(100), C(100)
+  real :: RA, RB, RC, RD
+  real :: yksi, kaksi, kolme, nalja
+  external :: yksi, kaksi, kolme, nalja
+  type(task_depend_kind) :: DEP
+  
+  task_block depends_to(DEP)
+  RA = yksi(A)
+  end task_block
+  
+  task_block depends_to(DEP)
+  RB = kaksi(B)
+  end task_block
+  
+  task_block
+  RC = kolme(C)
+  end task_block
+  
+  task_block depend_from(DEP)
+  RD = nalja(RA,RB)
+  end task_block
+  
+  task_sync all
+  
+  print*,RC+RD
+end program main
+```
+This syntax may not be ideal but it expresses the concept.
+In OpenMP, dependencies are expressed in the form of memory locations.
+Because this might be harder to implement in some scenarios,
+we propose an explicit opaque type that the implementation can use.
+
+## Known Shortcomings
+
+Fortran lacks a memory model in the way that Java, C11 and C++11 do.
+We do not take a position on whether that is a good or bad thing, but
+instead attempt to make the fewest changes required to address
+hazards of concurrent data access by tasks.
+
+One obvious solution for tasks is to reuse the coarray atomic operations,
+although this may not be acceptable to the committee.
+However, requiring that tasks use atomic operations to access data 
+that may be modified by another task is a straightforward solution to these hazards.
+Unfortunately, the overhead of coarray atomics may be higher than acceptable
+for shared-memory uses, in which case a new syntax is required.
+
+## Acknowledgements
+
+Thanks to the following people, who read this proposal and may have provided feedback:
