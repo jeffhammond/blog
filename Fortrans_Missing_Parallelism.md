@@ -27,9 +27,13 @@ program main
   real :: RA, RB, RC
   real :: yksi, kaksi, kolme
   external :: yksi, kaksi, kolme
+  
   RA = yksi(A)
+  
   RB = kaksi(B)
+  
   RC = kolme(C)
+  
   print*,RA+RB+RC
 end program main
 ```
@@ -47,11 +51,17 @@ program main
   real :: RA[*]
   real :: yksi, kaksi, kolme
   external :: yksi, kaksi, kolme
+  
   if (num_images().ne.3) STOP
+  
   if (this_image().eq.1) RA = yksi(A)
+  
   if (this_image().eq.2) RA = kaksi(A)
+  
   if (this_image().eq.3) RA = kolme(A)
+  
   SYNC ALL()
+  
   call co_sum(RA)
   if (this_image()) print*,RA
 end program main
@@ -74,11 +84,17 @@ program main
   real :: yksi, kaksi, kolme
   external :: yksi, kaksi, kolme
   integer :: k
+  
   do concurrent (k=1:3)
+  
     if (k.eq.1) RA = yksi(A)
+    
     if (k.eq.2) RB = kaksi(B)
+    
     if (k.eq.3) RC = kolme(C)
+    
   end do
+  
   print*,RA+RB+RC
 end program main
 ```
@@ -101,19 +117,25 @@ program main
   real :: RA, RB, RC
   real :: yksi, kaksi, kolme
   external :: yksi, kaksi, kolme
+  
   !$omp parallel
   !$omp master
+  
   !$omp task
   RA = yksi(A)
   !$omp end task
+  
   !$omp task
   RB = kaksi(B)
   !$omp end task
+  
   !$omp task
   RC = kolme(C)
   !$omp end task
+  
   !$omp end master
   !$omp end parallel
+  
   print*,RA+RB+RC
 end program main
 ```
@@ -141,16 +163,21 @@ program main
   real :: RA, RB, RC
   real :: yksi, kaksi, kolme
   external :: yksi, kaksi, kolme
+  
   task_block
   RA = yksi(A)
   end task_block
+  
   task_block
   RB = kaksi(B)
   end task_block
+  
   task_block
   RC = kolme(C)
   end task_block
+  
   task_sync all
+  
   print*,RA+RB+RC
 end program main
 ```
