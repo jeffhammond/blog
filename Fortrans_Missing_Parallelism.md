@@ -22,17 +22,37 @@ The reader may wish to consult the following for additional context on this topi
 
 Consider the following Fortran program:
 ```fortran
+module numerot
+  contains
+    function yksi(X) result(R)
+      implicit none
+      real :: X(100), R
+      R = norm2(X)
+    end function yksi
+    function kaksi(X) result(R)
+      implicit none
+      real :: X(100), R
+      R = 2*norm2(X)
+    end function kaksi
+    function kolme(X) result(R)
+      implicit none
+      real :: X(100), R
+      R = 3*norm2(X)
+    end function kolme
+end module numerot
+
 program main
+  use numerot
   implicit none
   real :: A(100), B(100), C(100)
   real :: RA, RB, RC
-  real :: yksi, kaksi, kolme
-  external :: yksi, kaksi, kolme
+  
+  A = 1
+  B = 1
+  C = 1
   
   RA = yksi(A)
-  
   RB = kaksi(B)
-  
   RC = kolme(C)
   
   print*,RA+RB+RC
@@ -47,18 +67,19 @@ How would we implement this in Fortran 2018?
 One way is to use coarrays and assign each function to a different image.
 ```fortran
 program main
+  use numerot
   implicit none
-  real :: A(100)[*]
-  real :: RA[*]
-  real :: yksi, kaksi, kolme
-  external :: yksi, kaksi, kolme
+  real :: A(100), B(100), C(100)
+  real :: RA, RB, RC
+  
+  A = 1
+  B = 1
+  C = 1
   
   if (num_images().ne.3) STOP
   
   if (this_image().eq.1) RA = yksi(A)
-  
   if (this_image().eq.2) RA = kaksi(A)
-  
   if (this_image().eq.3) RA = kolme(A)
   
   SYNC ALL()
@@ -79,19 +100,20 @@ Dynamic load-balancing is nontrivial and should not be delegated to application 
 Another way to implement this program is to use `DO CONCURRENT`:
 ```fortran
 program main
+  use numerot
   implicit none
   real :: A(100), B(100), C(100)
   real :: RA, RB, RC
-  real :: yksi, kaksi, kolme
-  external :: yksi, kaksi, kolme
   integer :: k
   
+  A = 1
+  B = 1
+  C = 1
+
   do concurrent (k=1:3)
   
     if (k.eq.1) RA = yksi(A)
-    
     if (k.eq.2) RB = kaksi(B)
-    
     if (k.eq.3) RC = kolme(C)
     
   end do
@@ -113,11 +135,14 @@ There is a proven solution for Fortran task parallelism in OpenMP (4.0 or later)
 
 ```fortran
 program main
+  use numerot
   implicit none
   real :: A(100), B(100), C(100)
   real :: RA, RB, RC
-  real :: yksi, kaksi, kolme
-  external :: yksi, kaksi, kolme
+  
+  A = 1
+  B = 1
+  C = 1
   
   !$omp parallel
   !$omp master
@@ -159,11 +184,14 @@ Because we need more than just data scoping, we use the keyword `task_block` to
 tell the implementation that execution concurrency is both permitted and desirable.
 ```fortran
 program main
+  use numerot
   implicit none
   real :: A(100), B(100), C(100)
   real :: RA, RB, RC
-  real :: yksi, kaksi, kolme
-  external :: yksi, kaksi, kolme
+  
+  A = 1
+  B = 1
+  C = 1
   
   task_block
   RA = yksi(A)
@@ -197,13 +225,16 @@ This is not the best way to allocate X, since X could be defined inside of the
 We also add T, which could be a read-only lookup table, for example.
 ```fortran
 program main
+  use numerot
   implicit none
   real :: A(100), B(100), C(100)
+  real :: RA, RB, RC
   real :: X(10)
   real :: T(1000)
-  real :: RA, RB, RC
-  real :: yksi, kaksi, kolme
-  external :: yksi, kaksi, kolme
+  
+  A = 1
+  B = 1
+  C = 1
   
   task_block local(X) shared(T)
   RA = yksi(A,X)
@@ -226,13 +257,16 @@ end program main
 Much like `DO CONCURRENT`, we should be able to write a fully explicit version using `default(none)`.
 ```fortran
 program main
+  use numerot
   implicit none
   real :: A(100), B(100), C(100)
+  real :: RA, RB, RC
   real :: X(10)
   real :: T(1000)
-  real :: RA, RB, RC
-  real :: yksi, kaksi, kolme
-  external :: yksi, kaksi, kolme
+  
+  A = 1
+  B = 1
+  C = 1
   
   task_block local_init(A) shared(RA) local(X) shared(T)
   RA = yksi(A,X)
@@ -263,12 +297,17 @@ For example, in our program, we can add a fourth function `nalja` that depends o
 ```fortran
 program main
   use iso_fortran_env, only : task_depend_kind
+  use numerot
   implicit none
   real :: A(100), B(100), C(100)
-  real :: RA, RB, RC, RD
-  real :: yksi, kaksi, kolme, nalja
-  external :: yksi, kaksi, kolme, nalja
+  real :: RA, RB, RC
+  real :: X(10)
+  real :: T(1000)
   type(task_depend_kind) :: DEP
+  
+  A = 1
+  B = 1
+  C = 1
   
   task_block depends_to(DEP)
   RA = yksi(A)
