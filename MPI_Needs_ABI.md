@@ -80,5 +80,41 @@ The Fortran ABI issue is similar but not one we are going to solve in the MPI Fo
 Plus, the Fortran standard experts will explain that this issue is the result of improper use of Fortran
 compilers and can be avoided just by using features that already exist in the Fortran standard.
 
-## 
+## The language use case
 
+C/C++ and Fortran applications aren't the only consumers of MPI.
+Because of MPI rich capability for multiprocessing, and standard nature, many developers
+would like to use MPI from [Python](https://www.python.org/),
+[Julia](https://julialang.org/), [Rust](https://www.rust-lang.org/), etc.
+
+How does one do this?  Because MPI implementations are all written in C, any language
+can call MPI via its own mechanism for calling C ABI symbols, which they all have
+due to needing to interact with the Linux operating system, etc.
+However, unlike e.g. `malloc`, which has a constant ABI on Linux, these languages
+need to know the binary representation of all of the MPI types to call those symbols.
+
+What this means is that the effort to build and test these MPI wrappers is O(N).
+We see this clearly in the Rust MPI project, [rsmpi](https://github.com/rsmpi/rsmpi),
+which reports testing against three different implementations, plus untested user experiences
+with a fourth:
+> rsmpi is currently tested with these implementations:
+>
+> * OpenMPI 3.0.4, 3.1.4, 4.0.1
+> * MPICH 3.3, 3.2.1
+> * MS-MPI (Windows) 10.0.0
+>
+> Users have also had success with these MPI implementations, but they are not tested in CI:
+>
+> * Spectrum MPI 10.3.0.1
+
+They furthermore alude to the O(N) effort here:
+
+> Since the MPI standard leaves some details of the C API unspecified (e.g. whether to implement certain constants and even functions using preprocessor macros or native C constructs, the details of most types, ...) rsmpi takes a two step approach to generating functional low-level bindings.
+> 
+> First, it uses a thin static library written in C (see rsmpi.h and rsmpi.c) that tries to capture the underspecified identifiers and re-exports them with a fixed C API. This library is built from build.rs using the gcc crate.
+>
+> Second, to generate FFI definitions tailored to each MPI implementation, rsmpi uses rust-bindgen which needs libclang. See the bindgen project page for more information.
+>
+> Furthermore, rsmpi uses the libffi crate which installs the native libffi which depends on certain build tools. See the libffi project page for more information.
+
+The [libffi](https://en.wikipedia.org/wiki/Libffi) project is used by many projects to call C libraries, so we can expect this pain to reappear over and over.
