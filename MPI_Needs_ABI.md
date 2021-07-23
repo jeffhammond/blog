@@ -158,6 +158,20 @@ arguments to get in the way of deciding that there is, in fact, a problem to sol
 It is the MPI Forum's responsibility to act on behalf of its users, in order
 to remain relevant.
 
+## Relevant prior art / best practice
+
+A very useful principal of the MPI Forum is that it does not standardize research, but practice.
+In the case of ABI compatibility, the HPC user community at [CEA](http://www-hpc.cea.fr/) has found the ABI
+issue to be sufficiently obnoxious that they built [wi4mpi](https://github.com/cea-hpc/wi4mpi)
+specifically to solve this problem.  CEA has been shipping this software since 2016, although
+the original license prevented its widespread use until now.
+
+It is also known that there is a patent on one particular methods of interoperating different
+MPI ABIs that prevents its use by the open-source community, but which demonstrates that
+at least one company recognized the value of solving this problem important enough to patent it.
+Sadly, the patent holder only managed to prevent others from solving the problem in open-source --
+they haven't actually bothered to implement the solution in a commercial product.
+
 ## Conclusion
 
 Every rational person in high-performance computing will admit that people are the most valuable
