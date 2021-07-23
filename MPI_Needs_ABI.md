@@ -135,6 +135,7 @@ one branch prediction on the critical path.
 If these performance arguments are valid, we should be able to see the impact experimentally.
 Hemal Shah, Moshe Voloshin, and Devesh Sharma measured MPI latency of MVAPICH2 versus Open-MPI
 and presented at [MUG20](http://mug.mvapich.cse.ohio-state.edu/mug/20/).
+
 <img width="594" alt="mv-vs-ompi" src="https://user-images.githubusercontent.com/406118/126758671-5946447f-037f-4761-96f0-164aa9335a2a.png">
 
 If we attribute the entire difference between the two libraries to the ABI choice,
