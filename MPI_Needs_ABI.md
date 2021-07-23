@@ -119,7 +119,7 @@ They furthermore alude to the O(N) effort here:
 
 The [libffi](https://en.wikipedia.org/wiki/Libffi) project is used by many projects to call C libraries, so we can expect this pain to reappear over and over.
 
-## How do we solve this project?
+## How do we solve this problem?
 
 The first step in solving any problem is to admit that there is a problem.
 This is nontrivial in this case, because many in the MPI Forum, especially the implementers,
@@ -151,6 +151,12 @@ that MVAPICH2 lacks versus Open-MPI.
 The question is whether the MPI user community cares more about these 100 nanoseconds
 versus the hours and days it takes humans to build the MPI software ecosystem twice,
 three times, or more, because of the lack of a standard ABI.
+
+Once the MPI Forum accepts that this is a problem, we can have all the
+arguments about what the right standard ABI is, but we cannot use any of those
+arguments to get in the way of deciding that there is, in fact, a problem to solve.
+It is the MPI Forum's responsibility to act on behalf of its users, in order
+to remain relevant.
 
 ## Conclusion
 
