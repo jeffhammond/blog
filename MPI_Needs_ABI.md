@@ -118,3 +118,61 @@ They furthermore alude to the O(N) effort here:
 > Furthermore, rsmpi uses the libffi crate which installs the native libffi which depends on certain build tools. See the libffi project page for more information.
 
 The [libffi](https://en.wikipedia.org/wiki/Libffi) project is used by many projects to call C libraries, so we can expect this pain to reappear over and over.
+
+## How do we solve this project?
+
+The first step in solving any problem is to admit that there is a problem.
+This is nontrivial in this case, because many in the MPI Forum, especially the implementers,
+believe that implementation freedom w.r.t. ABI is a feature, not a defect.
+Implementations will often argue that their ABI is the best design, which obviously creates
+some irreconcilable differences with other implementations, plus at least the MPICH ABI camp
+will argue that, even if their ABI isn't perfect, it's stability is an essential feature of
+the MPI ecosystem, and the cost of changing it is too great.
+
+As the argument goes on, there will be arguments about how compile-time constants allow
+lower latency than link-time constants, because of the potential for one cache miss or
+one branch prediction on the critical path.
+If these performance arguments are valid, we should be able to see the impact experimentally.
+Hemal Shah, Moshe Voloshin, and Devesh Sharma measured MPI latency of MVAPICH2 versus Open-MPI
+and presented at [MUG20](http://mug.mvapich.cse.ohio-state.edu/mug/20/).
+<img width="594" alt="mv-vs-ompi" src="https://user-images.githubusercontent.com/406118/126758671-5946447f-037f-4761-96f0-164aa9335a2a.png">
+If we attribute the entire difference between the two libraries to the ABI choice,
+then it is a very small effect, on the order of 100 nanoseconds, out of the 2500+ nanoseconds
+required to send a small message.
+See the [full presentation](http://mug.mvapich.cse.ohio-state.edu/static/media/mug/presentations/20/sharma-mug-20.pdf) for details.
+
+Perhaps that 100 nanoseconds is due to a cache miss when `MPI_Send` in
+Open-MPI dereferences `struct ompi_communicator_t *MPI_Comm`, but it could also be a cache miss
+in the guts due to how these libraries represent state that isn't user-visible,
+or perhaps it is just the aggregate cost of a few dozen instructions and handful of branches
+that MVAPICH2 lacks versus Open-MPI.
+The question is whether the MPI user community cares more about these 100 nanoseconds
+versus the hours and days it takes humans to build the MPI software ecosystem twice,
+three times, or more, because of the lack of a standard ABI.
+
+## Conclusion
+
+Every rational person in high-performance computing will admit that people are the most valuable
+component in our ecosystem.
+Furthermore, because MPI is a successful standard, there are hundreds of times more people
+using MPI and building software against it than there are implementing it.
+It is past time for the MPI Forum to prioritize the needs of its user community over the
+needs of its implementaters, or the dubious claims of performance overhead due to pointer chasing.
+
+Modern processors are incredibly good at pointer chasing, branch prediction, etc.
+We need to let those processors do their jobs and stop prematurely optimizing for something
+that isn't even a proven bottleneck on processors built in the past decade.
+
+Furthermore, we need to MPI implementers to get over their petty design arguments about whose
+ABI is superior to the other's and put users first.
+
+## Acknowledgements
+
+Thanks to Gonzalo Brito and Jim Dinan for an inspiring discussion on Slack.
+
+## Disclaimer and license
+
+The opinions expressed in this post are exclusively the author's and not those of his
+current and past co-workers, co-authors, friends or family members.
+
+(c) Copyright Jeff Hammond, 2021. No reuse permitted except by permission from the author.
