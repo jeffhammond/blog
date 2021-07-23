@@ -2,15 +2,16 @@
 
 ## Introduction
 
-[MPI](https://www.mpi-forum.org/) has always been API standard.
+[MPI](https://www.mpi-forum.org/) has always been an API standard.
 Implementations are not constrained in how they define opaque types (e.g. `MPI_Comm`),
 which means they compile into different binary representations.
 This is fine for users who only use one implementation, or are content to recompile their software for each of these.
 Many users, including those building both traditional C/C++/Fortran libraries and new languages that use MPI via the C ABI,
 are tired of the duplication of effort required because MPI lacks a standard ABI.
 
+Definitions:
 - API = Application Programming Interface, i.e. the signature `MPI_Barrier(MPI_Comm)`.
-- ABI = Application Binary Interface, i.e. the binary representation of `MPI_Comm` in memory (e.g. `int` vs a pointer).
+- ABI = Application Binary Interface, i.e. the binary representation of `MPI_Comm` in memory (e.g. `int` versus a pointer).
 
 ## Motivating example
 
