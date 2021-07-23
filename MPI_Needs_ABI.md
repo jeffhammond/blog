@@ -23,7 +23,7 @@ Let's consider a trivial library that implements a dot product using MPI:
 ```c
 // Please ignore the lack of support for vectors longer than `MPI_INT` or 
 // error handling - this code is not intended to be used in production.
-double parallel_ddot(MPI_Comm comm, double * x, double * y, int length)
+double parallel_ddot(MPI_Comm comm, const double * x, const double * y, int length)
 {
   double z = 0.0;
   for (int i=0; i<length; ++i) {
