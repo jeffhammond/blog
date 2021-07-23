@@ -83,7 +83,7 @@ compilers and can be avoided just by using features that already exist in the Fo
 ## The language use case
 
 C/C++ and Fortran applications aren't the only consumers of MPI.
-Because of MPI rich capability for multiprocessing, and standard nature, many developers
+Because of MPI's rich capability for multiprocessing, and standard nature, many developers
 would like to use MPI from [Python](https://www.python.org/),
 [Julia](https://julialang.org/), [Rust](https://www.rust-lang.org/), etc.
 
