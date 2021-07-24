@@ -168,7 +168,8 @@ typedef struct ompi_datatype_t *MPI_Datatype;
 ```
 
 In contrast to MPICH, Open-MPI has to lookup the size of the datatype
-inside of a 352-byte `struct` (?), which is not particularly relevant
+inside of a [352-byte `struct`](https://github.com/open-mpi/ompi/blob/master/opal/datatype/opal_datatype.h#L145),
+which is not particularly relevant
 since the type of MPI code that will notice such an overhead is going
 to pass the same datatype over and over, in which case, the CPU is going
 to cache and correctly branch-predict the lookup and associated usage
