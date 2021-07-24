@@ -122,6 +122,9 @@ it, as long as they use it consistently.
 
 MPI datatypes are opaque objects, which means implementations can represent them however they want.
 Here we see different philosophies in MPICH and Open-MPI.
+
+### MPICH
+
 MPICH's [mpi.h](https://github.com/pmodels/mpich/blob/main/src/include/mpi.h.in) contains the following:
 ```c
 typedef int MPI_Datatype;                                                                
@@ -151,6 +154,12 @@ There are a bunch of other macros that take advantage of the
 hidden structure of the `MPI_Datatype` handle that the reader
 can study in [mpir_datatype.h](https://github.com/pmodels/mpich/blob/main/src/include/mpir_datatype.h)
 
+### Open-MPI
+
+Open-MPI's [mpi.h](https://github.com/open-mpi/ompi/blob/master/ompi/include/mpi.h.in)
+defines the datatype handle to be a pointer, which means that built-in datatypes
+cannot be compile-time constants, although they are link-time constants, which ends
+up being similarly efficient with modern toolchains, for most purposes.
 ```c
 typedef struct ompi_datatype_t *MPI_Datatype;
 ...
@@ -169,7 +178,7 @@ typedef struct ompi_datatype_t *MPI_Datatype;
 
 In contrast to MPICH, Open-MPI has to lookup the size of the datatype
 inside of a [352-byte `struct`](https://github.com/open-mpi/ompi/blob/master/opal/datatype/opal_datatype.h#L145),
-which is not particularly relevant
+which is not a concerning overhead
 since the type of MPI code that will notice such an overhead is going
 to pass the same datatype over and over, in which case, the CPU is going
 to cache and correctly branch-predict the lookup and associated usage
