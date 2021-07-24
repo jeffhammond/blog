@@ -14,4 +14,4 @@ I am a nerd.  I have a life outside of work that revolves around my family that 
 
 ## Professional biography
 
-Jeff Hammond is a Principal Engineer at Intel where he works on a wide range of HPC projects.  His research interests include parallel programming models and system architecture.  Previously, Jeff worked at the Argonne Leadership Computing Facility where he worked on Blue Gene and built things with MPI.  Jeff received his PhD in Chemistry from the University of Chicago for work on NWChem.
+Jeff Hammond is a Principal Engineer at NVIDIA where he works on HPC software for GPUs and ARM CPUs.  His research interests include parallel programming models and system architecture.  Previously, Jeff worked at Intel and the Argonne Leadership Computing Facility where he worked on a range of projects, including MPI-3, oneAPI, Blue Gene and Xeon Phi.  Jeff received his PhD in Chemistry from the University of Chicago for work on NWChem.
