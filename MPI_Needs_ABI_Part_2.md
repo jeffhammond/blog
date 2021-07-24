@@ -15,11 +15,28 @@ There are multiple aspects to an MPI ABI.  Here are a few:
 - Opaque objects, including `MPI_Comm`, `MPI_Datatype`, `MPI_Win`, etc.
   As these are opaque, implementations can define them to be anything.
   
-### The `MPI_Status` object
+[MPI-4](https://www.mpi-forum.org/docs/mpi-4.0/mpi40-report.pdf)
+imposes the following constraints on opaque objects:
+
+> All named constants, with the exceptions noted below for Fortran, can be used in
+> initialization expressions or assignments, but not necessarily in array declarations or as
+> labels in C `switch` or Fortran `select`/`case` statements. This implies named constants
+> to be link-time but not necessarily compile-time constants. The named constants listed
+> below are required to be compile-time constants in both C and Fortran. These constants
+> do not change values during execution. Opaque objects accessed by constant handles are
+> defined and do not change value between MPI initialization (MPI_INIT) and MPI completion
+> (MPI_FINALIZE). The handles themselves are constants and can be also used in initialization
+> expressions or assignments
+
+We will see below that MPICH has elected to provide compile-time constants, even though
+they are not required.  This allows the implementation source code to do some things efficiently,
+although portable applications cannot rely on this behavior.
+
+## The `MPI_Status` object
 
 Let's look at three different implementations of the `MPI_Status` object:
 
-#### New MPICH
+### New MPICH
 
 This is the status object after [this commit](https://github.com/pmodels/mpich/commit/4b516e886aa3aa51379e0c3806c911c9333c2cc3),
 which made MPICH consistent with Intel MPI, in order to establish the [MPICH ABI initiative](https://www.mpich.org/abi/).
@@ -35,7 +52,7 @@ typedef struct MPI_Status {
 } MPI_Status;
 ```
 
-#### Old MPICH
+### Old MPICH
 
 Prior to being consistent with Intel MPI, MPICH had the following status object.
 
@@ -54,7 +71,7 @@ typedef struct MPI_Status {
 } MPI_Status;
 ```
 
-#### Open-MPI
+### Open-MPI
 
 This is from Open-MPI as of [65bb9e6](https://github.com/open-mpi/ompi/blob/65bb9e6b4cffd1cafa23f73b2faf7817c5323ab8/ompi/include/mpi.h.in).
 I have not attempted to track the history of the Open-MPI status object.
@@ -78,7 +95,7 @@ struct ompi_status_public_t {
 typedef struct ompi_status_public_t ompi_status_public_t;
 ```
 
-#### Analysis
+### Analysis
 
 We see here that all variants have the required fields, `MPI_SOURCE`, `MPI_TAG` and `MPI_ERROR`,
 and the old MPICH ABI matched the Open-MPI ABI in having both a dedicated `int` field for the cancelled
@@ -100,3 +117,66 @@ In any case, it seems like either the new MPICH or Open-MPI ABI would be fine fo
 Some will argue that Open-MPI wastes 31 bits, but perhaps those bits can be used for other things
 in some implementations.  As this state isn't user-visible it doesn't matter how implementations use
 it, as long as they use it consistently.
+
+## MPI datatypes
+
+MPI datatypes are opaque objects, which means implementations can represent them however they want.
+Here we see different philosophies in MPICH and Open-MPI.
+MPICH's [mpi.h](https://github.com/pmodels/mpich/blob/main/src/include/mpi.h.in) contains the following:
+```c
+typedef int MPI_Datatype;                                                                
+#define MPI_CHAR           ((MPI_Datatype)0x4c000101)                                    
+#define MPI_SIGNED_CHAR    ((MPI_Datatype)0x4c000118)                                    
+#define MPI_UNSIGNED_CHAR  ((MPI_Datatype)0x4c000102)                                    
+#define MPI_BYTE           ((MPI_Datatype)0x4c00010d)                                    
+#define MPI_WCHAR          ((MPI_Datatype)0x4c00040e)                                    
+#define MPI_SHORT          ((MPI_Datatype)0x4c000203)                                    
+#define MPI_UNSIGNED_SHORT ((MPI_Datatype)0x4c000204)                                    
+#define MPI_INT            ((MPI_Datatype)0x4c000405)                                    
+#define MPI_UNSIGNED       ((MPI_Datatype)0x4c000406)                                    
+#define MPI_LONG           ((MPI_Datatype)0x4c000807)                                    
+#define MPI_UNSIGNED_LONG  ((MPI_Datatype)0x4c000808)                                    
+#define MPI_FLOAT          ((MPI_Datatype)0x4c00040a)                                    
+#define MPI_DOUBLE         ((MPI_Datatype)0x4c00080b)                                    
+#define MPI_LONG_DOUBLE    ((MPI_Datatype)0x4c00080c)                                    
+#define MPI_LONG_LONG_INT  ((MPI_Datatype)0x4c000809)  
+```
+These values are obviously special, but how?
+One feature is that they encode the size of built-in datatypes
+such that these can be queried trivially with this macro:
+```c
+#define MPIR_Datatype_get_basic_size(a) (((a)&0x0000ff00)>>8)
+```
+There are a bunch of other macros that take advantage of the
+hidden structure of the `MPI_Datatype` handle that the reader
+can study in [mpir_datatype.h](https://github.com/pmodels/mpich/blob/main/src/include/mpir_datatype.h)
+
+```c
+typedef struct ompi_datatype_t *MPI_Datatype;
+...
+/* C datatypes */
+#define MPI_DATATYPE_NULL OMPI_PREDEFINED_GLOBAL(MPI_Datatype, ompi_mpi_datatype_null)   
+#define MPI_BYTE OMPI_PREDEFINED_GLOBAL(MPI_Datatype, ompi_mpi_byte)                     
+#define MPI_PACKED OMPI_PREDEFINED_GLOBAL(MPI_Datatype, ompi_mpi_packed)                 
+#define MPI_CHAR OMPI_PREDEFINED_GLOBAL(MPI_Datatype, ompi_mpi_char)                     
+#define MPI_SHORT OMPI_PREDEFINED_GLOBAL(MPI_Datatype, ompi_mpi_short)                   
+#define MPI_INT OMPI_PREDEFINED_GLOBAL(MPI_Datatype, ompi_mpi_int)                       
+#define MPI_LONG OMPI_PREDEFINED_GLOBAL(MPI_Datatype, ompi_mpi_long)                     
+#define MPI_FLOAT OMPI_PREDEFINED_GLOBAL(MPI_Datatype, ompi_mpi_float)                   
+#define MPI_DOUBLE OMPI_PREDEFINED_GLOBAL(MPI_Datatype, ompi_mpi_double) 
+...
+```
+
+In contrast to MPICH, Open-MPI has to lookup the size of the datatype
+inside of a 352-byte `struct` (?), which is not particularly relevant
+since the type of MPI code that will notice such an overhead is going
+to pass the same datatype over and over, in which case, the CPU is going
+to cache and correctly branch-predict the lookup and associated usage
+every time.
+```
+static inline int32_t opal_datatype_type_size(const opal_datatype_t *pData, size_t *size)
+{
+    *size = pData->size;
+    return 0;
+}
+```
