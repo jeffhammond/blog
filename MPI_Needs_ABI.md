@@ -189,6 +189,9 @@ that isn't even a proven bottleneck on processors built in the past decade.
 Furthermore, we need to MPI implementers to get over their petty design arguments about whose
 ABI is superior to the other's and put users first.
 
+I added [MPI ABI Technical Details](MPI_Needs_ABI_Part_2.md) for people who are convinced this is
+a great idea and want to start thinking about what a good ABI might look like.
+
 ## Acknowledgements
 
 Thanks to Gonzalo Brito and Jim Dinan for an inspiring discussion on Slack.
