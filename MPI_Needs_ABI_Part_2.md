@@ -95,6 +95,24 @@ struct ompi_status_public_t {
 typedef struct ompi_status_public_t ompi_status_public_t;
 ```
 
+The wi4mpi ABI for the status object is the same as Open-MPI's:
+```c
+struct CCC_mpi_status_struct {
+    /* These fields are publicly defined in the MPI specification.
+       User applications may freely read from these fields. */
+    int MPI_SOURCE;
+    int MPI_TAG;
+    int MPI_ERROR;
+    /* The following two fields are internal to the Open MPI
+       implementation and should not be accessed by MPI applications.
+       They are subject to change at any time.  These are not the
+       droids you're looking for. */
+    int _cancelled;
+    size_t _ucount;
+};
+typedef struct CCC_mpi_status_struct MPI_Status;
+```
+
 ### Analysis
 
 We see here that all variants have the required fields, `MPI_SOURCE`, `MPI_TAG` and `MPI_ERROR`,
@@ -189,4 +207,40 @@ static inline int32_t opal_datatype_type_size(const opal_datatype_t *pData, size
     *size = pData->size;
     return 0;
 }
+```
+
+### wi4mpi
+
+wi4mpi defines all the opaque handles to be `size_t`, which ensures they are at
+least as big as MPICH's `int` handles and Open-MPI's pointer handles,
+although I don't know if this is the reason.
+```
+typedef size_t MPI_Comm;
+typedef size_t MPI_Datatype;
+typedef size_t MPI_Errhandler;
+typedef size_t MPI_File;
+typedef size_t MPI_Group;
+typedef size_t MPI_Info;
+typedef size_t MPI_Op;
+typedef size_t MPI_Request;
+typedef size_t MPI_Message;
+typedef size_t MPI_Win;
+```
+
+wi4mpi defines the built-in datatypes to be sequential integers,
+which means they are not attempting to encode useful information
+the way MPICH's do, although they are compile-time constants,
+unlike Open-MPI's.
+I do not know if compile-time constancy is important in wi4mpi.
+```c
+/* C datatypes */
+#define MPI_DATATYPE_NULL 0
+#define MPI_BYTE 1
+#define MPI_PACKED 2
+#define MPI_CHAR 3
+#define MPI_SHORT 4
+#define MPI_INT 5
+#define MPI_LONG 6
+#define MPI_FLOAT 7
+#define MPI_DOUBLE 8
 ```
