@@ -80,3 +80,23 @@ typedef struct ompi_status_public_t ompi_status_public_t;
 
 #### Analysis
 
+We see here that all variants have the required fields, `MPI_SOURCE`, `MPI_TAG` and `MPI_ERROR`,
+and the old MPICH ABI matched the Open-MPI ABI in having both a dedicated `int` field for the cancelled
+state plus a count field that supports at least 63b values.
+
+Apparently, the Intel MPI team decided to save 32 bits of space in their status object and distribute
+63 bits of count and 1 bit of cancelled boolean across two `int` fields, plus they eliminated the ABI
+slush fund that would have allowed MPICH to adapt to future changes in the MPI standard that would
+have required new fields in the status object.
+
+There isn't anything wrong with the Intel MPI ABI (aka new MPICH ABI).
+Testing the cancelled field involves testing a single bit rather than a 32b field,
+but since very few MPI programs cancel receives (and cancelling sends has been deprecated),
+the relative costs of these does not matter at all.
+The needs of the request object seem to be relatively stable over time, and in hindsight it seems
+like the ABI slush might have been unnecessarily conservative.
+
+In any case, it seems like either the new MPICH or Open-MPI ABI would be fine for standardization.
+Some will argue that Open-MPI wastes 31 bits, but perhaps those bits can be used for other things
+in some implementations.  As this state isn't user-visible it doesn't matter how implementations use
+it, as long as they use it consistently.
