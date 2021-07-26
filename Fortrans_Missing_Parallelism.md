@@ -24,23 +24,26 @@ Consider the following Fortran program:
 ```fortran
 module numerot
   contains
-    function yksi(X) result(R)
+    pure real function yksi(X)
       implicit none
-      real :: X(100), R
-      R = norm2(X)
+      real, intent(in) :: X(100)
+      !real, intent(out) :: R
+      yksi = norm2(X)
     end function yksi
-    function kaksi(X) result(R)
+    pure real function kaksi(X)
       implicit none
-      real :: X(100), R
-      R = 2*norm2(X)
+      real, intent(in) :: X(100)
+      kaksi = 2*norm2(X)
     end function kaksi
-    function kolme(X) result(R)
+    pure real function kolme(X)
       implicit none
-      real :: X(100), R
-      R = 3*norm2(X)
+      real, intent(in) :: X(100)
+      kolme = 3*norm2(X)
     end function kolme
 end module numerot
+```
 
+```fortran
 program main
   use numerot
   implicit none
@@ -59,7 +62,7 @@ program main
 end program main
 ```
 
-Assuming that `yksi`, `kaksi`, `kolme` share no state (which isn't visible in this program, if it exists), then
+Assuming that `yksi`, `kaksi`, `kolme` share no state, then
 all three functions can execute concurrently.
 
 How would we implement this in Fortran 2018?
@@ -70,7 +73,7 @@ program main
   use numerot
   implicit none
   real :: A(100), B(100), C(100)
-  real :: RA, RB, RC
+  real :: R
   
   A = 1
   B = 1
@@ -78,14 +81,14 @@ program main
   
   if (num_images().ne.3) STOP
   
-  if (this_image().eq.1) RA = yksi(A)
-  if (this_image().eq.2) RA = kaksi(A)
-  if (this_image().eq.3) RA = kolme(A)
+  if (this_image().eq.1) R = yksi(A)
+  if (this_image().eq.2) R = kaksi(A)
+  if (this_image().eq.3) R = kolme(A)
   
   SYNC ALL()
   
-  call co_sum(RA)
-  if (this_image()) print*,RA
+  call co_sum(R)
+  if (this_image()) print*,R
 end program main
 ```
 While this works, this approach has many shortcomings.
