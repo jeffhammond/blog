@@ -1,10 +1,13 @@
 FC = gfortran
 FFLAGS = -Wall -O2
 
-all: p1.x
+all: sequential.x
 
-%.x: %.F90
-	$(FC) $(FFLAGS) $< -o $@
+numerot.o: numerot.F90
+	$(FC) $(FFLAGS) -c $< -o $@
+
+%.x: %.F90 numerot.o
+	$(FC) $(FFLAGS) numerot.o $< -o $@
 
 clean:
 	-rm -f *.x
