@@ -1,7 +1,7 @@
 FC = gfortran
-FFLAGS = -Wall -O2
+FFLAGS = -Wall -O2 -fopenmp -fcoarray=single
 
-all: sequential.x
+all: sequential.x coarray.x do-concurrent.x openmp.x
 
 numerot.o: numerot.F90
 	$(FC) $(FFLAGS) -c $< -o $@
