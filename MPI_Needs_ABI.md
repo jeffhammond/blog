@@ -182,6 +182,11 @@ using MPI and building software against it than there are implementing it.
 It is past time for the MPI Forum to prioritize the needs of its user community over the
 needs of its implementaters, or the dubious claims of performance overhead due to pointer chasing.
 
+We need to pay the price of breaking all the ABIs one more time, in order to free our users from the pain
+of O(N) build and test of all the code that depends on MPI.
+
+![MPI-ABI](https://user-images.githubusercontent.com/406118/127174807-1cd9676a-eb8b-40d6-8da3-b154121e8182.jpg)
+
 Modern processors are incredibly good at pointer chasing, branch prediction, etc.
 We need to let those processors do their jobs and stop prematurely optimizing for something
 that isn't even a proven bottleneck on processors built in the past decade.
