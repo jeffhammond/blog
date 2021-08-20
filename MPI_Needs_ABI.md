@@ -95,6 +95,7 @@ However, unlike e.g. `malloc`, which has a constant ABI on Linux, these language
 need to know the binary representation of all of the MPI types to call those symbols.
 
 What this means is that the effort to build and test these MPI wrappers is O(N).
+
 We see this clearly in the Rust MPI project, [rsmpi](https://github.com/rsmpi/rsmpi),
 which reports testing against three different implementations, plus untested user experiences
 with a fourth:
@@ -119,6 +120,15 @@ They furthermore alude to the O(N) effort here:
 > Furthermore, rsmpi uses the libffi crate which installs the native libffi which depends on certain build tools. See the libffi project page for more information.
 
 The [libffi](https://en.wikipedia.org/wiki/Libffi) project is used by many projects to call C libraries, so we can expect this pain to reappear over and over.
+
+We see the same duplication of testing effort in [mpi4py](https://github.com/mpi4py/mpi4py/).
+The project's [Azure pipelines](https://github.com/mpi4py/mpi4py/blob/master/.azure/pipelines.yml) show
+tests for each of four different versions of Python on Linux, MacOS and Windows, where Linux and MacOS
+testing is doubled for MPICH and Open-MPI.
+It is possible to argue that projects should test against multiple implementations even if there is only
+one MPI ABI, but it's not obvious that this testing should be exhaustive in the way it is today,
+or that the hunt for implementation-specific bugs needs to be done in automated CI/CD environments
+running in shared-memory instances in the cloud.
 
 ## How do we solve this problem?
 
