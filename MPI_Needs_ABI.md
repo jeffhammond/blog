@@ -51,7 +51,7 @@ I can only link that library with an application that is compiled with the same 
 And if I go completely nuts and use dynamic libraries, any `libparallel_math.so` I create can only be linked and loaded
 alongside compatible shared objects and applications.
 
-Finally, if I link my application against against a specific MPI implemntation, I must run the resulting application
+Finally, if I link my application against a specific MPI implementation, I must run the resulting application
 with a compatible `mpirun`.
 
 All of this would be irrelevant if everyone used the same MPI implementation, similar to how (almost) everyone uses glibc on Linux,
