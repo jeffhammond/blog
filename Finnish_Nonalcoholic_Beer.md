@@ -1,4 +1,4 @@
-# Jeff rates Finnish non-alcohoic beer
+# Jeff rates Finnish non-alcoholic beer
 
 I do not consume ethanol, but I like beer.
 These are my notes on this topic, from the perspective of a resident of Finland.
