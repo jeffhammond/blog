@@ -60,6 +60,13 @@ varies between, say, Helsinki and Pori.
 If you speak kirjakieli, everyone will know you are a novice speaker, but
 at least they will understand you.  I don't see any reason to try to figure out
 puhukieli until you are at least a year into learning Finnish and live here.
+I have not devoted any time to it, but my family tells me things.
+
+If you are going to learn puhukieli to listen to others, the only parts I've managed
+to learn so far are that mä=minä and sä=sinä (shorthand for first and second person
+singular pronouns) and that numbers get shortened from, say, yksi to yks, which
+is good because the written form of 99 is yhdeksänkymmentäyhdeksän, which makes for a
+rather tedious singing of "99 bottles of beer on the wall"...
 
 # Swearing and Rude Phrases
 
