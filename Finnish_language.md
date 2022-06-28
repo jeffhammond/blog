@@ -90,7 +90,7 @@ I can look them up in a dictionary.
 
 Given that finding Finnish language education outside of Finland is quite difficult,
 if you are planning to come to Finland for a nontrivia period of time, I recommend that 
-you devote some time to it.
+you devote some time to DuoLingo.
 
 # Google Translate
 
