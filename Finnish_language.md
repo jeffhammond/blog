@@ -43,9 +43,8 @@ even if one does not understand the meaning.
 For example, one should learn to pronounce one's address properly, for the purposes of providing
 it to taxi drivers.
 
-Note that the sound of one letter and two letters is meaningful, for both vowels and consonants.
-For example, väri=color and vaari=grandpa
-(this is not the best example because "a" and "ä" are different letters, but I can't think of a better example right now).
+Note that the sound of one letter and two letters is meaningful, for both vowels and consonants,
+as demonstrated above with tapan/tapaan.
 You also need to pronounce double-t and double-k properly, 
 since these are part of two different syllables.
 For example, bank=pankki, which is pronounced pank-ki.
