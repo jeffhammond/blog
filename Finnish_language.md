@@ -105,8 +105,10 @@ It knows very little about homonyms, and will falsely lead you to believe that
 you are eating varnish-flavored quark, because "lakka" means both varnish and cloudberry.
 You will also have to figure out from context whether something is a cucumber or a throat
 (both are "kurkku").
+
 On the other hand, it can translate from images, which is incredible useful when one 
-receives a form letter or a parking ticket.
+receives a form letter or a parking ticket.  I frequently use my phone to translate
+street signs (not while driving, of course) and other public postings
 
 # Online Resources
 
