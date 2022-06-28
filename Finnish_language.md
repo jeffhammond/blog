@@ -95,8 +95,8 @@ that I hear spoken in public, and be able to hear most of the others well enough
 I can look them up in a dictionary.
 
 Given that finding Finnish language education outside of Finland is quite difficult,
-if you are planning to come to Finland for a nontrivia period of time, I recommend that 
-you devote some time to DuoLingo.
+if you are planning to come to Finland for a nontrivial period of time, I recommend that 
+you devote some time to DuoLingo Finnish.
 
 # Google Translate
 
