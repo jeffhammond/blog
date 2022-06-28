@@ -44,7 +44,7 @@ For example, one should learn to pronounce one's address properly, for the purpo
 it to taxi drivers.
 
 Note that the sound of one letter and two letters is meaningful, for both vowels and consonants.
-For example, vari=color and vaari=grandpa.
+For example, väri=color and vaari=grandpa.
 You also need to pronounce double-t and double-k properly, 
 since these are part of two different syllables.
 For example, bank=pankki, which is pronounced pank-ki.
