@@ -132,9 +132,9 @@ The latter is going to be useless for most purposes.
 Finally, the above is ugly and tedious - no one wants to write code like that
 to execute independent tasks.
 
-## The OpenMP Solution
+## The OpenMP/OpenACC Solution
 
-There is a proven solution for Fortran task parallelism in OpenMP (4.0 or later).
+There is a proven solution for Fortran task parallelism in OpenMP (4.0 or later) or OpenACC:
 
 ```fortran
 program main
@@ -168,16 +168,45 @@ program main
   print*,RA+RB+RC
 end program main
 ```
-This program will execute regardless of the available hardware parallelism, including sequentially.
-Furthermore, for more complex programs, the user can specify many tasks and the OpenMP runtime
-will schedule them on the available resources in a reasonable way.
-Most importantly, OpenMP has a mechanism for specifying dependencies between tasks, which is profoundly useful
-in complex applications.
+
+```fortran
+program main
+  use numerot
+  implicit none
+  real :: A(100), B(100), C(100)
+  real :: RA, RB, RC
+  
+  A = 1
+  B = 1
+  C = 1
+  
+  !$acc async
+  RA = yksi(A)
+  !$acc end async
+  
+  !$acc async
+  RB = kaksi(B)
+  !$acc end async
+  
+  !$acc async
+  RC = kolme(C)
+  !$acc end async
+  
+  !$acc async wait
+  
+  print*,RA+RB+RC
+end program main
+```
+
+These programs will execute regardless of the available hardware parallelism, including sequentially.
+OpenMP tasking is more powerful in some use cases than OpenACC, by allowing the user to create
+dependencies between tasks, which forces the runtime to do more work when scheduling.
+This feature - tasks with dependencies - is not proposed for Fortran.
 
 ## The Proposal for Fortran
 
-Because OpenMP tasking is a proven approach implemented in essentially all of the Fortran 2008
-compilers, it is reasonable to assume that it's design is portable.
+Because OpenMP independent tasks is implemented in essentially all of the Fortran 2008 compilers, 
+it is reasonable to assume that the design is portable.
 The goal here is to design a language feature for Fortran that is consistent with
 its existing semantics and syntax.
 
@@ -354,4 +383,6 @@ for shared-memory uses, in which case a new syntax is required.
 
 ## Acknowledgements
 
-Thanks to the following people, who read this proposal and may have provided feedback:
+Thanks to the following people, who read this proposal or related material and may have provided feedback:
+- Ondrej Certik
+- Jeff Larkin
