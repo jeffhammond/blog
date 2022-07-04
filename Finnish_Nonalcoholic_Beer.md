@@ -6,7 +6,7 @@ These are my notes on this topic, from the perspective of a resident of Finland.
 ### [KOFF Crisp Vaalea Lager](https://www.carlsberggroup.com/products/koff/koff-crisp-vaalea-lager)
 
 I like this one quite a bit.  There is enough hops flavor and the flavor palatte seems well-balanced.
-The quality-control of this beer is imperfet - I can detect variation between batches.
+The quality-control of this beer is imperfect - I can detect variation between batches.
 Some cans taste a bit metallic, while others are a bit skunkier than others.
 
 ### [More Brewing Lager](https://www.hartwall.fi/yritys/uutiset/2021/hartwallin-uusi-olutbrandi-more-brewing-on-alkoholittomana-syntynyt/)
