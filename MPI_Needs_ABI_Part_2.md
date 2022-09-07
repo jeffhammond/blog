@@ -277,3 +277,9 @@ C and Fortran 2008, for MPICH to continue use magic values for built-ins, and fo
 to use pointers.  Open-MPI will still need a lookup table for the older Fortran interfaces,
 but one of these should be [deprecated](https://github.com/mpi-forum/mpi-issues/issues/561) 
 in MPI-5 anyways.
+
+# Disclaimer and license
+
+The opinions expressed in this post are exclusively the author's and not those of his current and past co-workers, co-authors, friends or family members.
+
+(c) Copyright Jeff Hammond, 2021. No reuse permitted except by permission from the author.
