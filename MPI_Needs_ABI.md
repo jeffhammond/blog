@@ -177,6 +177,11 @@ issue to be sufficiently obnoxious that they built [wi4mpi](https://github.com/c
 specifically to solve this problem.  CEA has been shipping this software since 2016, although
 the original license prevented its widespread use until now.
 
+A similar effort was undertaken at the Perimeter Institute for Theoretical Physics, 
+leading to [MPItrampoline](https://github.com/eschnett/MPItrampoline), which defines
+its own ABI that can be redirected to many different MPI implementations, thereby
+solving the O(N) problem for applications.
+
 It is also known that there is a patent on one particular methods of interoperating different
 MPI ABIs that prevents its use by the open-source community, but which demonstrates that
 at least one company recognized the value of solving this problem important enough to patent it.
