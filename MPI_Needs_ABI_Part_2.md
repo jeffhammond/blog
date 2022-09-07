@@ -136,6 +136,20 @@ Some will argue that Open-MPI wastes 31 bits, but perhaps those bits can be used
 in some implementations.  As this state isn't user-visible it doesn't matter how implementations use
 it, as long as they use it consistently.
 
+If I was going to standardize an ABI for the status object, I'd put the public fields first and use
+24 bytes total, which is sufficient for what both of the major ABIs do right now.
+I'm not aware of any architectural advantage of the 20 bytes Intel MPI uses.
+One could be conservative and round up to 32 bytes, which has some architectural advantages,
+since many modern CPUs have 256-bit data paths.
+```c
+typedef struct MPI_Status {
+    int MPI_SOURCE;
+    int MPI_TAG;
+    int MPI_ERROR;
+    int extra[3];
+} MPI_Status;
+```
+
 ## MPI datatypes
 
 MPI datatypes are opaque objects, which means implementations can represent them however they want.
@@ -244,3 +258,22 @@ I do not know if compile-time constancy is important in wi4mpi.
 #define MPI_FLOAT 7
 #define MPI_DOUBLE 8
 ```
+
+### Analysis
+
+There are advantages to both approaches.  MPICH optimizes for the common case of built-in types,
+and does a lookup for others, while Open-MPI always does a pointer lookup, but then has what
+it needs in both cases.
+
+The other advantage of the MPI approach is with Fortran.  In Fortran, handles are `INTEGER`,
+or handles are a type with a single member that is an `INTEGER`.  MPICH conversions between
+C and Fortran are trivial (ignoring the case where Fortran `INTEGER` is larger than C `int`,
+which is a terrible idea anyways).  Open-MPI has to maintain a lookup table to go between
+C and Fortran.
+
+The easy solution here is to use `intptr_t` for handles and change the Fortran 2008 handle
+definition to use `intptr_t` for `MPI_VAL`.  This allows for trivial conversions between
+C and Fortran 2008, for MPICH to continue use magic values for built-ins, and for Open-MPI
+to use pointers.  Open-MPI will still need a lookup table for the older Fortran interfaces,
+but one of these should be [deprecated](https://github.com/mpi-forum/mpi-issues/issues/561) 
+in MPI-5 anyways.
