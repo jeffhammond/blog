@@ -17,11 +17,44 @@ This is important:
 
 ## Ideas
 
-MPICH handles are `int`.  Open-MPI handles are pointers.
-We should standardize handles to be `intptr_t` so that both designs are valid.
-This is particularly advantageous for the Fortran 2008 module, as noted below.
+MPICH handles are `int`.  Open-MPI handles are pointers. 
+We could standardize handles to be `intptr_t` so that both designs are valid, but we can do better.
+One issue with both approaches is the lack of type checking.
+For example, [https://github.com/ParRes/Kernels/commit/ee5e5fb09019bd78325d9680cd93f52858812aa4](this bug)
+existed for years because the developers only tested with MPICH-based implementations.
+More generally, C compilers have no way to distinguish between different `typedef`-to-`int` handles,
+and thus in calls where it is possible to transpose handles, compilers may struggle to detect these mistakes
+with some implementations (e.g. MPICH).
 
-### Fortran
+We can learn from the Fortran 2008 design here, and make handles a C `struct`, which contains
+a single value, `intptr_t`.  This allows C compilers to check handles for type-correctness,
+but adds no overhead, because there is no overhead to accessing the first element
+of a struct.
+
+Furthermore, since the exact same type can be defined in Fortran 2003, we can eliminate
+handle conversion functions altogether.
+Handle conversions will remain required for `use mpi` (`mpif.h` should be deleted in MPI-5)
+but that's a necessary evil for legacy Fortran users.
+
+Today, handle conversion overhead is nontrivial in operations like `MPI_Waitall`, because
+a temporary vector must be allocated (unless the implementation "cheats" in some way).
+The proposed ABI definition of handles will eliminate this.
+
+### C handles
+
+This is how a handle should be defined:
+```c
+typedef struct {
+  intptr_t val;
+} MPI_Handle;
+```
+The name of the member of the `struct` does not matter, because users should not access them.
+There is not a lot of value in obfuscating the contents, and some of the methods for doing
+that make type checking impossible.
+Having type checking for well-behaved users is far more important than trying to prevent
+users who want to violate the standard from writing illegal code.
+
+### Fortran handles
 
 We should change this:
 ```fortran
@@ -38,7 +71,7 @@ end type MPI_Handle
 at which point all of the C-Fortran handle interoperability stuff becomes irrelevant.
 
 Right now, Fortran handle conversions are trivial with MPICH but not trivial with Open-MPI.
-Widening to `intptr_t` makes everything better.
+No implemenation will have overhead with the MPI-5 ABI.
 
 ## Challenges
 
@@ -107,10 +140,12 @@ Users can use `MPI_Get_version` to verify consistency with run-time support.
 ## Fortran compiler support
 
 These depend on the Fortran compiler, and how the library deals with `CFI_cdesc_t`.
-These should be deprecated and replaced with run-time queries, if possible.
+These should be deprecated and replaced with run-time queries, if possible, although
+some applications may need to be able to rely on them at compile-time.
 ```
 MPI_SUBARRAYS_SUPPORTED (Fortran only) 
 MPI_ASYNC_PROTECTS_NONBLOCKING (Fortran only)
 ```
 These features are associated with Fortran 2018 support, and should be widely supported
 by the time we are going to vote on an ABI anyways.
+It made sense to make them optional in 2012, but by 2024, they should be required.
