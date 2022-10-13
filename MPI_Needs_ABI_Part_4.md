@@ -20,7 +20,7 @@ This is important:
 MPICH handles are `int`.  Open-MPI handles are pointers. 
 We could standardize handles to be `intptr_t` so that both designs are valid, but we can do better.
 One issue with both approaches is the lack of type checking.
-For example, [https://github.com/ParRes/Kernels/commit/ee5e5fb09019bd78325d9680cd93f52858812aa4](this bug)
+For example, [this bug](https://github.com/ParRes/Kernels/commit/ee5e5fb09019bd78325d9680cd93f52858812aa4)
 existed for years because the developers only tested with MPICH-based implementations.
 More generally, C compilers have no way to distinguish between different `typedef`-to-`int` handles,
 and thus in calls where it is possible to transpose handles, compilers may struggle to detect these mistakes
