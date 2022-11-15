@@ -149,3 +149,10 @@ MPI_ASYNC_PROTECTS_NONBLOCKING (Fortran only)
 These features are associated with Fortran 2018 support, and should be widely supported
 by the time we are going to vote on an ABI anyways.
 It made sense to make them optional in 2012, but by 2024, they should be required.
+
+## Disclaimer and license
+
+The opinions expressed in this post are exclusively the author's and not those of his 
+current and past co-workers, co-authors, friends or family members.
+
+(c) Copyright Jeff Hammond, 2021. No reuse permitted except by permission from the author.
