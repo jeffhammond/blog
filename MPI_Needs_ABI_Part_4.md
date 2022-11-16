@@ -44,11 +44,19 @@ The proposed ABI definition of handles will eliminate this.
 
 This is how a handle should be defined:
 ```c
-typedef struct {
+typedef union {
   intptr_t val;
+  // below is implementation defined, and can be anything 
+  // as long as it does not change the layout implied by intptr_t
+#ifdef IMPLEMENTATION_HAS_POINTER_HANDLES
+  void * our_pointer;
+#endif
+#ifdef IMPLEMENTATION_HAS_INT_HANDLES
+  int our_integer;
+#endif
 } MPI_Handle;
 ```
-The name of the member of the `struct` does not matter, because users should not access them.
+The name of the member of the `union` does not matter, because users should not access them.
 There is not a lot of value in obfuscating the contents, and some of the methods for doing
 that make type checking impossible.
 Having type checking for well-behaved users is far more important than trying to prevent
@@ -72,6 +80,9 @@ at which point all of the C-Fortran handle interoperability stuff becomes irrele
 
 Right now, Fortran handle conversions are trivial with MPICH but not trivial with Open-MPI.
 No implemenation will have overhead with the MPI-5 ABI.
+
+Alternatively, if we don't change the Fortran ABI, having the C ABI makes it easy to write
+a standalone Fortran 2008 module, which can have a better Fortran ABI.
 
 ## Challenges
 
