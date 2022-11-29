@@ -78,7 +78,7 @@ Now, our purists are far less happy than before and likely have at least one of 
   1. My system does not support coarays properly or at all.
   2. My system does not support OpenACC, CUDA Fortran, or StdPar (i.e. `DO CONCURRENT` on GPUs).
   3. My system does not support an feature-complete OpenMP 5 GPU compiler.
-  4. My system does not Fortran 2018 features not related to parallelism.
+  4. My system does not support Fortran 2018 features not related to parallelism.
   5. The only good Fortran compiler on my system is not mainstream and not supported by important HPC software.
   6. The only good Fortran compiler I can use has no well-defined support model.
 
