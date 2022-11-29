@@ -1,5 +1,12 @@
 # Dealing with Imperfect Fortran Compilers
 
+TL;DR You can build your Fortran application with two different compilers to get
+the best of both worlds when it comes to coarrays and GPU parallelism, for example.
+This is not the easiest thing to do, but it's better than the bucket of tears
+you're living with right now.
+
+## The Current State of Fortran Compilers
+
 Most programmers are familiar with imperfect software.
 There are few, if any, nontrivial bug-free programs.
 However, users of Fortran are likely more familiar with this topic than the average programmer.
@@ -49,15 +56,71 @@ Fortran programmers fall into a few different categories:
   1. Luddites who haven't left the 20th century,
      don't know that the Fortran language has changed since the mid-1980s [1],
      and whose code compiles everywhere this side of a punchcard reader.
-  3. Pragmatists, who write to the widely supported common subset of Fortran language support, 
+  2. Pragmatists, who write to the widely supported common subset of Fortran language support, 
      which can be approximated by Fortran 2003, and definitely does not include coarrays.
      These folks also don't care about coarrays because MPI is better and 
      has been universally available since before the `gfortran` project began.
-  4. Purists, who insist that, if WG5 can imagine it, then it should be usable, 
+  3. Purists, who insist that, if WG5 can imagine it, then it should be usable, 
      at least within a few years of the ISO ink drying.
      Such users either have very business relationships or are willing to compromise
      on at least one of performance and portability.
 
+In a CPU-only HPC universe, particularly one dominated by x86, most programmers
+could live relatively comfortably within one of these categories.
+However, we haven't lived in a CPU-only HPC universe since at least 2012,
+when ORNL's Titan Cray XK7 ushered in the beginning of the GPU era of HPC.
+Furthermore, x86 domination in HPC streadily eroded as numerous ARM-based
+alternatives have emerged, ranging from the exotic Fujitsu A64fx processor
+to awesome-yet-boring cloud-oriented offerings from Ampere and AWS.
+
+Now, our purists are far less happy than before and likely have at least one of the following grievances:
+
+    1. My system does not support coarays properly or at all.
+    2. My system does not support OpenACC, CUDA Fortran, or StdPar (i.e. `DO CONCURRENT` on GPUs).
+    3. My system does not support an feature-complete OpenMP 5 GPU compiler.
+    4. My system does not Fortran 2018 features not related to parallelism.
+    5. The only good Fortran compiler on my system is not mainstream and not supported by important HPC software.
+    6. The only good Fortran compiler I can use has no well-defined support model.
+
+Even the pragmatists are starting to get impatient and would like more of the post-2003 features
+than are universally available.
+
+Fortunately, there is a solution to these problems, but it requires a bit of software gymnastics.
+On the other hand, if you can actually use most of the features in Fortran 2003+, you're more than
+smart enough to deal with the back handspring I'm going to describe next.
+
+## A Brief Digression about Application-Binary Interfaces (ABIs)
+
+None of the aforementioned problems exist in the C world because
+- with a small number of reasonable caveats -
+C compilers are interoperable, and there's issue mixing objects
+from GCC, Clang and a vendor C compiler based on EDG.
+This is because C supports ABI stability on a given platform
+and very few users want to mix C standard libraries, which
+is the one thing one cannot do.
+Similarly, in C++, one can mix GCC and Clang or a EDG-based vendor compiler
+as long as they use the same STL.
+
+Unfortunately, Fortran offers nothing in the way of ABI stability.
+Each Fortran compiler can have its own convention for passing
+`CHARACTER*(*)` strings and arrays, with the latter often including
+a non-standard descriptor format, which may not be well-documented.
+Finally, I/O statements and all the intrinsics are a based on
+a compiler-specific runtime library, which is tighly bound
+to the aforementioned calling conventions.
+
+However, starting in Fortran 2003, there has been standardized
+interoperability between Fortran and C, and this feature set
+became almost magical in Fortran 2018, with the introduction
+of `CFI_cdesc_t` and other features.
+
+Extended C-Fortran interoperability in Fortran 2018 is the magic
+that is going to allow us to break free from the limitations
+of a single imperfect compiler, to realize the features provided
+by TWO imperfect compilers, so long as there are clean boundaries
+between the Fortran code called by each.
+
+## 
 
 
 # References
