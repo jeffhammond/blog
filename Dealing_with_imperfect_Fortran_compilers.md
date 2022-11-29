@@ -75,12 +75,12 @@ to awesome-yet-boring cloud-oriented offerings from Ampere and AWS.
 
 Now, our purists are far less happy than before and likely have at least one of the following grievances:
 
-    1. My system does not support coarays properly or at all.
-    2. My system does not support OpenACC, CUDA Fortran, or StdPar (i.e. `DO CONCURRENT` on GPUs).
-    3. My system does not support an feature-complete OpenMP 5 GPU compiler.
-    4. My system does not Fortran 2018 features not related to parallelism.
-    5. The only good Fortran compiler on my system is not mainstream and not supported by important HPC software.
-    6. The only good Fortran compiler I can use has no well-defined support model.
+  1. My system does not support coarays properly or at all.
+  2. My system does not support OpenACC, CUDA Fortran, or StdPar (i.e. `DO CONCURRENT` on GPUs).
+  3. My system does not support an feature-complete OpenMP 5 GPU compiler.
+  4. My system does not Fortran 2018 features not related to parallelism.
+  5. The only good Fortran compiler on my system is not mainstream and not supported by important HPC software.
+  6. The only good Fortran compiler I can use has no well-defined support model.
 
 Even the pragmatists are starting to get impatient and would like more of the post-2003 features
 than are universally available.
@@ -135,7 +135,7 @@ There is an issue with complex number return values,
 but I'm going to ignore that one.  Not today, Satan.
 
 So basically, if you are willing to write Fortran with REO Speedwagon
-playing in th ebackground, and your idea of a complicated datatype
+playing in the background, and your idea of a complicated datatype
 is `DOUBLE PRECISION A(LDA,*)` then you don't need to know what
 comes next.
 
