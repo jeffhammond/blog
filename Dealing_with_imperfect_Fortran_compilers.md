@@ -120,7 +120,28 @@ of a single imperfect compiler, to realize the features provided
 by TWO imperfect compilers, so long as there are clean boundaries
 between the Fortran code called by each.
 
-## 
+## The Luddites Might be Right
+
+Amusingly, the luddites who stopped reading already have been able
+to rely on the almost-ABI stability of legacy Fortran
+(which is erroneously called "Fortran 77" by many,
+but is more accurately Fortran ~85).
+Because `integer A(*)` behaves like C99's `int a[restrict]`,
+and the infrequent use of proper strings in Fortran,
+Fortran libraries like the BLAS and LAPACK are mostly compiler-agnostic.
+For example, one does not need to handle the string length in
+`DGEMM` because exactly 1 character is read per argument.
+There is an issue with complex number return values, 
+but I'm going to ignore that one.  Not today, Satan.
+
+So basically, if you are willing to write Fortran with REO Speedwagon
+playing in th ebackground, and your idea of a complicated datatype
+is `DOUBLE PRECISION A(LDA,*)` then you don't need to know what
+comes next.
+
+## The Thing That Should Not Be
+
+I wrote https://github.com/jeffhammond/Cthulhu ... WILL FINISH LATER
 
 
 # References
