@@ -156,12 +156,31 @@ All of this is possible in a strictly standard-compliant way
 as of Fortran 2018, although it is a bit tricky to implement,
 and there are some limitations.
 
+One of the more obvious applications of this technique is to build
+a program that uses coarrays for distributed-memory parallelism
+and `DO CONCURRENT` with GPU parallelism.
+Currently, this is not possible on any interesting platform,
+since the NVIDIA HPC Fortran compiler does not support coarrays
+and neither GCC or Cray has GPU support for `DO CONCURRENT`
+right now.  Intel Fortran supports coarrays and recently released
+GPU support for `DO CONCURRENT`, but Intel has not shipped a
+proper HPC GPU, hence the "interesting platform" caveat.
+
+A less exciting application of this method is to build libraries
+that are implemented using modern Fortran that are usable from
+any language that supports C calling conventions / linkage.
+For example, one could rewrite the BLAS and LAPACK without
+disrupting user experience for those accustomed to the legacy
+Fortran APIs, or event ship an implementation of CBLAS that
+contains zero C code.
+
 The technical details of this are described in a [follow-up post](https://github.com/jeffhammond/blog/blob/main/Dealing_with_imperfect_Fortran_compilers_2.md).
 
 ## References
 
   1. [Doctor Fortran in "Military Strength"](https://stevelionel.com/drfortran/2020/05/16/doctor-fortran-in-military-strength/)
   2. [Aquarium Leaking Slap Meme Generator](https://imgflip.com/memegenerator/194158970/Aquarium-Leaking-Slap)
+  3. Intel recently released a compiler that has `DO CONCURRENT` support
 
 ## Disclaimer and license
 
