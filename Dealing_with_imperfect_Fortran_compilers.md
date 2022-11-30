@@ -139,16 +139,19 @@ playing in the background, and your idea of a complicated datatype
 is `DOUBLE PRECISION A(LDA,*)` then you don't need to know what
 comes next.
 
-## The Thing That Should Not Be
+## TODO
 
-I wrote https://github.com/jeffhammond/Cthulhu ... WILL FINISH LATER
+![72lgcj](https://user-images.githubusercontent.com/406118/204720665-04588b4e-36d1-40d5-bf61-32e9928bc94a.jpg)
 
 
-# References
+The technical details of this are described in a [follow-up post](https://github.com/jeffhammond/blog/blob/main/Dealing_with_imperfect_Fortran_compilers_2.md).
+
+## References
 
   1. [Doctor Fortran in "Military Strength"](https://stevelionel.com/drfortran/2020/05/16/doctor-fortran-in-military-strength/)
+  2. [Aquarium Leaking Slap Meme Generator](https://imgflip.com/memegenerator/194158970/Aquarium-Leaking-Slap)
 
-# Disclaimer and license
+## Disclaimer and license
 
 The opinions expressed in this post are exclusively the author's 
 and not those of his current and past co-workers, co-authors, friends or family members.
