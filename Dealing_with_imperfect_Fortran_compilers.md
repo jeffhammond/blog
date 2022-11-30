@@ -147,6 +147,7 @@ is to split Fortran applications into pieces that can be compiled with
 different Fortran compilers, and to connect them using CFI features.
 
 Pictorially, this can be described as follows [2]:
+
 ![72lgcj](https://user-images.githubusercontent.com/406118/204720665-04588b4e-36d1-40d5-bf61-32e9928bc94a.jpg)
 
 The overall effect of this is as if we turn 1 application into
