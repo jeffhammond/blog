@@ -114,7 +114,7 @@ interoperability between Fortran and C, and this feature set
 became almost magical in Fortran 2018, with the introduction
 of `CFI_cdesc_t` and other features.
 
-Extended C-Fortran interoperability in Fortran 2018 is the magic
+Extended C-Fortran interoperability (CFI) in Fortran 2018 is the magic
 that is going to allow us to break free from the limitations
 of a single imperfect compiler, to realize the features provided
 by TWO imperfect compilers, so long as there are clean boundaries
@@ -139,10 +139,21 @@ playing in the background, and your idea of a complicated datatype
 is `DOUBLE PRECISION A(LDA,*)` then you don't need to know what
 comes next.
 
-## TODO
+## Getting to the Point
 
+You've waited long enough.
+The trick we are going to use to make all of our Fortran dreams come true
+is to split Fortran applications into pieces that can be compiled with 
+different Fortran compilers, and to connect them using CFI features.
+
+Pictorially, this can be described as follows [2]:
 ![72lgcj](https://user-images.githubusercontent.com/406118/204720665-04588b4e-36d1-40d5-bf61-32e9928bc94a.jpg)
 
+The overall effect of this is as if we turn 1 application into
+1 application and N libraries, where the libraries have C linkage.
+All of this is possible in a strictly standard-compliant way
+as of Fortran 2018, although it is a bit tricky to implement,
+and there are some limitations.
 
 The technical details of this are described in a [follow-up post](https://github.com/jeffhammond/blog/blob/main/Dealing_with_imperfect_Fortran_compilers_2.md).
 
