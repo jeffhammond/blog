@@ -5,6 +5,8 @@ the best of both worlds when it comes to coarrays and GPU parallelism, for examp
 This is not the easiest thing to do, but it's better than the bucket of tears
 you're living with right now.
 
+This post describes the motivation.  [Part 2](https://github.com/jeffhammond/blog/blob/main/Dealing_with_imperfect_Fortran_compilers_2.md) has the technical details.
+
 ## The Current State of Fortran Compilers
 
 Most programmers are familiar with imperfect software.
