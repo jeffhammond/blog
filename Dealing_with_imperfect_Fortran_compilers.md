@@ -95,7 +95,7 @@ smart enough to deal with the back handspring I'm going to describe next.
 
 None of the aforementioned problems exist in the C world because
 - with a small number of reasonable caveats -
-C compilers are interoperable, and there's issue mixing objects
+C compilers are interoperable, and there's no issue mixing objects
 from GCC, Clang and a vendor C compiler based on EDG.
 This is because C supports ABI stability on a given platform
 and very few users want to mix C standard libraries, which
