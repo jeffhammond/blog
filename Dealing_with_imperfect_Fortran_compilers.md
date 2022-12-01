@@ -182,7 +182,7 @@ The technical details of this are described in a [follow-up post](https://github
 
   1. [Doctor Fortran in "Military Strength"](https://stevelionel.com/drfortran/2020/05/16/doctor-fortran-in-military-strength/)
   2. [Aquarium Leaking Slap Meme Generator](https://imgflip.com/memegenerator/194158970/Aquarium-Leaking-Slap)
-  3. Intel recently released a compiler that has `DO CONCURRENT` support
+  3. Intel recently released a compiler that has `DO CONCURRENT` GPU support but it has a few issues that need to be addressed.
 
 ## Disclaimer and license
 
