@@ -36,7 +36,11 @@ It turns out that this is how babies learn to speak.  My kids didn't read a book
 
 Later in grad school, I tried to learn C.  It turns out this is rather hard coming from Fortran, because Fortran passes everything by reference, and C passes everything by value, I spent a lot of time during my first year with C wondering why I could modify `a` with `void foo(int)`.  But eventually I learned, not because I read the Kernighan and Ritchie book or [ISO/IEC 9899](http://www.iso-9899.info/wiki/The_Standard) but because I read thousands of lines of C code that I was able to determine was some form of good.  For example, [PSI](https://psicode.org/) isn't perfect -- it was created by a bunch of [3+ star programmers](https://wiki.c2.com/?ThreeStarProgrammer) -- but it was a lot better than the C I knew how to write at the time, and working C is better than C that either doesn't work or doesn't exist.
 
+I've subsequently become a pretty good C programmer, by reading C code written by people who know what they are doing, and by writing lots of C and seeing how it works.  I eventually read K&R, but I read it as a history book, not as a technical manual.  C is a rather simple language and modern compilers are so good at issuing warnings when code is non-conforming that it's pretty easy to learn "toddler-style".
+
 # Learning Java
+
+At one point, I tried to learn Java.  I read a book for about a day and decided that it was close enough to C++ that I could just guess-and-check using Eclipse, which was a fantastic IDE for Java.  So I'd write C++ in Eclipse and it would tell me what I was doing wrong.  I wrote a number of simple but interesting programs in Java this way.
 
 # Appendix
 
