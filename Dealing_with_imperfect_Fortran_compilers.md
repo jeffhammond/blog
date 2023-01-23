@@ -77,7 +77,7 @@ to awesome-yet-boring cloud-oriented offerings from Ampere and AWS.
 
 Now, our purists are far less happy than before and likely have at least one of the following grievances:
 
-  1. My system does not support coarays properly or at all.
+  1. My system does not support coarrays properly or at all.
   2. My system does not support OpenACC, CUDA Fortran, or StdPar (i.e. `DO CONCURRENT` on GPUs).
   3. My system does not support an feature-complete OpenMP 5 GPU compiler.
   4. My system does not support Fortran 2018 features not related to parallelism.
