@@ -173,7 +173,7 @@ that are implemented using modern Fortran that are usable from
 any language that supports C calling conventions / linkage.
 For example, one could rewrite the BLAS and LAPACK without
 disrupting user experience for those accustomed to the legacy
-Fortran APIs, or event ship an implementation of CBLAS that
+Fortran APIs, or even ship an implementation of CBLAS that
 contains zero C code.
 
 The technical details of this are described in a [follow-up post](https://github.com/jeffhammond/blog/blob/main/Dealing_with_imperfect_Fortran_compilers_2.md).
