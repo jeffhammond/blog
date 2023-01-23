@@ -64,7 +64,7 @@ Fortran programmers fall into a few different categories:
      has been universally available since before the `gfortran` project began.
   3. Purists, who insist that, if WG5 can imagine it, then it should be usable, 
      at least within a few years of the ISO ink drying.
-     Such users either have very business relationships or are willing to compromise
+     Such users either have very business relationships with a compiler vendor or are willing to compromise
      on at least one of performance and portability.
 
 In a CPU-only HPC universe, particularly one dominated by x86, most programmers
