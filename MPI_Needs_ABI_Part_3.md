@@ -36,7 +36,7 @@ rather than have N-1 processes running along forever until they deadlock.
 
 Last time I looked, there are more launchers than there are MPI ABIs,
 so standardizing a launcher is at least as hard as getting everyone to agree
-on an ABI.  However, it may not be necessary, so let's try this.
+on an ABI.  However, it may not be necessary, so let's try this:
 
 In the case of Slurm or other launchers associated not with MPI
 implementations but with resource managers, there is no problem.
