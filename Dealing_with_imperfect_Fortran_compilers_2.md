@@ -192,9 +192,6 @@ to other dummy argument syntax, `(N)` or `(*)`, that I tried,
 not because of any connection to the gastrointestinal system._
 
 The subroutine has the following interface defined in a module.
-Technically, I should use `type(*), dimension(..)` but I managed
-to get it working using a F90 array descriptor, which WG5 people
-will tell me is evil, but it works, so how evil can it be? (The previous statement is wrong; `bind(C)` is enough. I'll correct this later.)
 ```fortran
     interface
         subroutine nstream_colon_trampoline(length,scalar,A,B,C) bind(C)
