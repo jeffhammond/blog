@@ -13,6 +13,8 @@ a mostly pre-modern Fortran chemistry application - my entire career,
 I am more proficient in C and it is the default language I use when writing new code.
 I've also written a nontrivial anount of C++ and Python, and have spent enough
 time writing other languages to appreciate the diversity of design choices that exist.
+Thus, I think I'm qualified to write objectively about why Fortran is a good language,
+and certainly why some of the criticisms of it are bogus.
 
 One of the common fallacies in programming language evaluation is to argue that
 because one language does better at a subset of features, it is therefore an
