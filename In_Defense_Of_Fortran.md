@@ -156,11 +156,27 @@ are similarly expressive when it comes to the mathematical code that matters,
 so it's hard to argue that Fortran can't be learned, while thousands of
 data scientists are learning Numpy every year.
 
+## Memory Safety
+
+Rust is a relatively new programming language that is obsessed with safety
+and correctness, but manages to preserve performance in the process.
+The Rust community has written quite a bit about memory safety relative
+to C and C++, neither of which are memory safe.  One can write a careful
+subset and C++ to avoid the flaming chainsaw juggling that is C memory
+management, but C++ compilers aren't going to prevent programmers from
+doing horrible things the way Rust does.
+
+I haven't seen anybody talk about Fortran being memory safe.  It's certainly
+not trying to be memory safe in the way that Rust is, but it is educational
+to try and write a memory leak in Fortran, because it's not easy.
+
 ##  Optional and named arguments
 
 This is a case where Fortran is just nice, and should be appreciated for it.
 Nobody is claiming that C++ is better than Fortran because
 of named arguments, because C++ doesn't have named arguments.
+
+## Object-Oriented Fortran
 
 
 
