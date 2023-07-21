@@ -1,6 +1,6 @@
 # Summary
 
-I started out in organic chemistry and ended up making supercomputers at Intel.
+I started out in organic chemistry and ended up making supercomputers at Intel and NVIDIA.
 
 Since people often ask me about how this happened, or to speak about career paths in general, I figure I should write it down.
 
@@ -54,6 +54,6 @@ In early 2014, Tim Mattson wrote me with an invitation to join his group at Inte
 
 When I interviewed with the Intel Parallel Computing Lab, they didn't provide much in terms of guidance about what I'd be doing.  At one point, I asked whether they wanted me to focus on computational chemistry, parallel programming models, or something else.  The answer was something along the lines of, "all of that sounds good to us."  I've always been fortunate to have a great deal of freedom in what I do and how I do it, so this was appreciated, although it forced me to take a small leap of faith as to whether or not they meant it.  Fortunately, they did mean it, and in my 6+ years at Intel, I have worked under and 80-20 rule, wherein I control about 80% of my time, and somebody else controls about 20% of my time.
 
-I'll write more about my time at Intel in another post.
+I'll write more about my time at Intel in another post.  Once I do that, I also need to write about working at NVIDIA.
 
-(c) Copyright Jeff Hammond, 2020. No reuse permitted except by permission from the author.
+(c) Copyright Jeff Hammond, 2023. No reuse permitted except by permission from the author.
