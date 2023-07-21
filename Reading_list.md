@@ -28,7 +28,7 @@ The Ascent of Money by Niall Ferguson.
 
 The Battle of Bretton Woods by Steil.
 
-The Origins of Totalitarianism by Hannary Arendt.
+The Origins of Totalitarianism by Hannar Arendt.
 
 Rust Atomics and Locks by Mara Bos.
 
