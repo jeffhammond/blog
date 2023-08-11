@@ -17,6 +17,8 @@ was created to allow larger than 2 GiB files on 32-bit platforms.
 
 There have been efforts to define 128-bit filesystems, but this post is going to explain why MPI
 does not need to have 128-bit offsets even if the underlying filesystem uses 128-bit offsets.
+MPI file offsets are for a single file, so it is not a question of how large the underlying
+filesystem is, but the size and extent of a single MPI file that matters here.
 
 The limit of a 64-bit offset, or rather a 63-bit offset if we are dealing with signed integers,
 is 2^63 = 8 * (1024)^6 = >8 billion gigabytes.  Let's look at what it would take to exceed this
