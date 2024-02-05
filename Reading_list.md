@@ -2,17 +2,19 @@ These are books I've read or am reading and which I have enjoyed.
 
 # Currently Reading
 
-[The Making of the Atomic Bomb by Richard Rhodes](https://en.wikipedia.org/wiki/The_Making_of_the_Atomic_Bomb).
+[What If?: Serious Scientific Answers to Absurd Hypothetical Questions](https://en.wikipedia.org/wiki/What_If%3F_(book)).
+
+[The Strangest Man: The Hidden Life of Paul Dirac, Quantum Genius](https://en.wikipedia.org/wiki/The_Strangest_Man).
+
+Dark Sun: The Making of the Hydrogen Bomb, by Richard Rhodes.
 
 [The Illustrated Man by Ray Bradbury](https://en.wikipedia.org/wiki/The_Illustrated_Man).
 
-The Last Empire by Serghii Plokhy.
-
 The Moscow Puzzles by Kordemsky.
 
-A Concise History of Finland by Kirby.
-
 # Planning to Read
+
+A Concise History of Finland by Kirby.
 
 The Key to Nuclear Restraint by Thomas Jonter.
 
@@ -35,6 +37,12 @@ Rust Atomics and Locks by Mara Bos.
 Sunburst and Luminary by Don Eyles.
 
 # Have Read
+
+The Last Empire by Serghii Plokhy.
+
+[American Prometheus](https://en.wikipedia.org/wiki/American_Prometheus).
+
+[The Making of the Atomic Bomb by Richard Rhodes](https://en.wikipedia.org/wiki/The_Making_of_the_Atomic_Bomb).
 
 How Not to Network A Nation by Benjamin Peters.
 I stopped reading this one because it was too slow.  The topic could be covered with far fewer words.
