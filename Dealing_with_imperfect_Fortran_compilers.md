@@ -44,7 +44,7 @@ memory model known as coarrays.
 Cray has a great implementation of coarrays but it's tied to their
 high-performance networking hardware.
 Intel and GCC Fortran both support coarrays, but one of these
-compilers is very good and distributed-memory performance and
+compilers is very good at distributed-memory performance and
 the other is very good at shared-memory performance
 (which is which is left as an exercise for the reader)
 so HPC users at NCAR, for example, are forced to choose
