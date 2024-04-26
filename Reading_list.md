@@ -4,8 +4,6 @@ These are books I've read or am reading and which I have enjoyed.
 
 [What If?: Serious Scientific Answers to Absurd Hypothetical Questions](https://en.wikipedia.org/wiki/What_If%3F_(book)).
 
-[The Strangest Man: The Hidden Life of Paul Dirac, Quantum Genius](https://en.wikipedia.org/wiki/The_Strangest_Man).
-
 Dark Sun: The Making of the Hydrogen Bomb, by Richard Rhodes.
 
 [The Illustrated Man by Ray Bradbury](https://en.wikipedia.org/wiki/The_Illustrated_Man).
@@ -37,6 +35,8 @@ Rust Atomics and Locks by Mara Bos.
 Sunburst and Luminary by Don Eyles.
 
 # Have Read
+
+[The Strangest Man: The Hidden Life of Paul Dirac, Quantum Genius](https://en.wikipedia.org/wiki/The_Strangest_Man).
 
 The Last Empire by Serghii Plokhy.
 
