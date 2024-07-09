@@ -4,6 +4,8 @@ These are books I've read or am reading and which I have enjoyed.
 
 A Line in the Sand by James Barr.
 
+[The Demon-Haunted World: Science as a Candle in the Dark](https://en.m.wikipedia.org/wiki/The_Demon-Haunted_World) by Carl Sagan.
+
 [What If?: Serious Scientific Answers to Absurd Hypothetical Questions](https://en.wikipedia.org/wiki/What_If%3F_(book)).
 
 Dark Sun: The Making of the Hydrogen Bomb, by Richard Rhodes.
