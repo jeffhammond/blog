@@ -2,6 +2,8 @@ These are books I've read or am reading and which I have enjoyed.
 
 # Currently Reading
 
+A Line in the Sand by James Barr.
+
 [What If?: Serious Scientific Answers to Absurd Hypothetical Questions](https://en.wikipedia.org/wiki/What_If%3F_(book)).
 
 Dark Sun: The Making of the Hydrogen Bomb, by Richard Rhodes.
