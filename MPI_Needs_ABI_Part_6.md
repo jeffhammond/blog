@@ -90,6 +90,17 @@ NVHPC |  | 0 | -1 (`0xFFFFFFFF`)
 LLVM (`flang-new`) |  | 0 | -1 (`0xFFFFFFFF`)
 Cray |  | 0 | 1
 
+Here's more fun data:
+
+Fortran Compiler|Flags| 0 | 1 | -1 | 2
+---|---|---|---|---|---
+GCC |  | F & ! T | T & ! F | T & ! T | T & ! T
+IFX |  | F & ! T | T & ! F | T & ! F | F & ! T
+IFX | `-fpscomp logicals` | F & ! T | T & ! F | T & ! F | T & ! F
+NVHPC |  | F & ! T | T & ! F | T & ! F | F & ! T
+LLVM (`flang-new`) |  | F & ! T | T & ! F | T & ! F | F & ! T
+
+
 # Sentinels
 
 There was a request to provide addresses in C for all of 
