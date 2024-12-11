@@ -81,7 +81,54 @@ Fortran `.TRUE.` and `.FALSE.` are.
 
 # Sentinels
 
+There was a request to provide addresses in C for all of 
+the Fortran sentinels, not just `MPI_F(08)_STATUS(ES)_IGNORE`.  
+We declined to solve this, because it's easy to implement directly
+in user code in the rare cases (profiling tools) where it is needed.
+
+See https://github.com/jeffhammond/vapaa/blob/main/source/detect_sentinels.c
+and https://github.com/jeffhammond/vapaa/blob/main/source/detect_sentinels_c.F90.
 
 # Callbacks
 
 This one is more difficult, and is not part of the current proposal for the standard.
+There are multiple use cases, not just Fortran, for extended callbacks that have
+extra state associated therewith, the way `MPI_Grequest_start` does.
+This allows the language interface to attach language-specific information
+about types or error-handling to the callback, so that it can be implemented
+more efficiently or in a more idiomatic way.
+
+A new reduction callback was proposed to address this, but there was too much debate
+about it's semantics to get it into the first version of the ABI.
+Specifically, should the user state be mutable or not, and if so, how
+is it protected from concurrent access (race conditions)?
+
+This doesn't mean the problem cannot be solved.  It merely requires callback
+trampolines, as are implemented in
+[Mukautuva](https://github.com/jeffhammond/mukautuva) and
+[MPITrampoline](https://github.com/eschnett/MPItrampoline),
+at some added cost.
+However, since user-defined operations and callbacks are rarely
+on the critical path, this situation is tolerable.
+
+We intend to fix the callback situation in a future revision of MPI.
+
+# Module ABIs
+
+The internal structure of a Fortran module appears to leak into the symbol names.
+This means that a design like MPICH's
+```fortran
+MODULE MPI
+    USE MPI_CONSTANTS
+    USE MPI_SIZEOFS
+    USE MPI_BASE
+    USE PMPI_BASE
+END MODULE MPI
+```
+may not be compatible with another implementation's module, if it uses different
+names internally.
+
+It is not yet proven that this is a problem, but if it is, then the only way
+to get an MPI Fortran module ABI is to specify the internal structure.
+Ironically, the terrible `mpif.h` doesn't have this problem, because it doesn't
+use modules at all.
