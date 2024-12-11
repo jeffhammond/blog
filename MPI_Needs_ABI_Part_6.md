@@ -79,6 +79,17 @@ Even if 0 is `.FALSE.`, `.TRUE.` could be 1 or `0xFFFFFFFF`.
 As before, we need a function to tell MPI what the literal values of
 Fortran `.TRUE.` and `.FALSE.` are.
 
+The illustrate the previous case
+
+Fortran Compiler|Flags|`.FALSE.`|`.TRUE.`
+---|---|---|---
+GCC |  | 0 | 1
+IFX |  | 0 | -1 (`0xFFFFFFFF`)
+IFX | `-fpscomp logicals` | 0 | 1
+NVHPC |  | 0 | -1 (`0xFFFFFFFF`)
+LLVM (`flang-new`) |  | 0 | -1 (`0xFFFFFFFF`)
+Cray |  | 0 | 1
+
 # Sentinels
 
 There was a request to provide addresses in C for all of 
