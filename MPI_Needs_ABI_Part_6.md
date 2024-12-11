@@ -22,7 +22,7 @@ One solution to the `MPI_Fint` problem would be to define it to C `int`
 and disallow MPI Fortran support from using an `INTEGER` that is not
 equivalent.  Instead, we will add new functions that are nearly identical
 to f2c/c2f that do not depend on the Fortran compiler.  These functions
-are `MPI_<Handle>_{to_int,from_int}` (names could be changed later).
+are `MPI_<Handle>_{toint,fromint}`.
 As long as Fortran `INTEGER` is not smaller than C `int`, which is true
 in all reasonable environments, these functions can be used to implement
 f2c/c2f in the MPI Fortran API.
@@ -48,13 +48,40 @@ It is expected that implementations can provide a more efficient implementation.
 Because the C status object (`MPI_Status`) is now fully specified, no
 new conversion functions are required.
 
-# Callbacks
+# Fortran types and their MPI datatypes
 
+When we call a reduction from Fortran with, e.g., `MPI_REAL`,
+a user-defined callback will get a datatype argument.
+If the C implementation of MPI doesn't know what `MPI_REAL` is,
+it's going to detect this as an invalid datatype.
+We can't just work around this by translating Fortran types
+to C types and passing `MPI_FLOAT`, because this means that
+datatype logic inside of user callbacks written in Fortran will
+not work.
+Thus, the MPI C implementation needs to know that `MPI_REAL` is
+valid and to preserve it throughout the program.
+At the same time, it also needs to know how to implement built-in
+reductions and other features correctly.
 
+The solution to this problem is a function to inform MPI of the
+C equivalents of all Fortran types.  This way, the MPI library can
+implement `(MPI_REAL,MPI_SUM)` reductions with `MPI_FLOAT` and get
+native performance.  Otherwise, a library like Vapaa would have to
+implement all the built-in reductions manually, which is not optimal.
+
+The other issue here is that MPI may need to implement logical reductions
+like `MPI_LAND`, `MPI_LOR` and `MPI_LXOR` in C.  This requires it to know
+how Fortran `LOGICAL` works.  For historical reasons, going back to the
+VAX platform, Fortran `LOGICAL` may not behave like C.  It may, for example,
+use the sign bit to represent booleans, rather than 0 and non-zero.
+Even if 0 is `.FALSE.`, `.TRUE.` could be 1 or `0xFFFFFFFF`.
+
+As before, we need a function to tell MPI what the literal values of
+Fortran `.TRUE.` and `.FALSE.` are.
 
 # Sentinels
 
 
+# Callbacks
 
-# Fortran types and their MPI datatypes
-
+This one is more difficult, and is not part of the current proposal for the standard.
