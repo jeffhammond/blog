@@ -2,25 +2,21 @@ These are books I've read or am reading and which I have enjoyed.
 
 # Currently Reading
 
+Command and Control by Eric Schlosser.
+
 A Line in the Sand by James Barr.
 
 [The Demon-Haunted World: Science as a Candle in the Dark](https://en.m.wikipedia.org/wiki/The_Demon-Haunted_World) by Carl Sagan.
 
-[What If?: Serious Scientific Answers to Absurd Hypothetical Questions](https://en.wikipedia.org/wiki/What_If%3F_(book)).
+The Key to Nuclear Restraint by Thomas Jonter.
 
 Dark Sun: The Making of the Hydrogen Bomb, by Richard Rhodes.
 
 [The Illustrated Man by Ray Bradbury](https://en.wikipedia.org/wiki/The_Illustrated_Man).
 
-The Moscow Puzzles by Kordemsky.
-
 # Planning to Read
 
 A Concise History of Finland by Kirby.
-
-The Key to Nuclear Restraint by Thomas Jonter.
-
-Dark Sun by Richard Rhodes.
 
 Legacy of Ashes by Tim Weiner.
 
@@ -34,13 +30,19 @@ The Battle of Bretton Woods by Steil.
 
 The Origins of Totalitarianism by Hannar Arendt.
 
-Rust Atomics and Locks by Mara Bos.
-
 Sunburst and Luminary by Don Eyles.
 
 # Have Read
 
+Chip War by Chris Miller.  Outstanding book on the current and past state of semiconductors.
+
+The Right Stuff by Tom Wolfe.
+
+The NVIDIA Way by Tae Kim.
+
 [The Strangest Man: The Hidden Life of Paul Dirac, Quantum Genius](https://en.wikipedia.org/wiki/The_Strangest_Man).
+
+[What If?: Serious Scientific Answers to Absurd Hypothetical Questions](https://en.wikipedia.org/wiki/What_If%3F_(book)).
 
 The Last Empire by Serghii Plokhy.
 
@@ -72,7 +74,7 @@ The Soul of a New Machine by Tracy Kidder.  (I guess I didn't finish this one)
 
 Inside the Message Passing Interface by Supalov.
 
-Cybernetics by Wiener.
+[Cybernetics](https://en.wikipedia.org/wiki/Cybernetics:_Or_Control_and_Communication_in_the_Animal_and_the_Machine) by Norbert Wiener.
 
 [One Giant Leap by Charles Fishman](https://www.simonandschuster.com/books/One-Giant-Leap/Charles-Fishman/9781501106309).
 This is a great sociopolitical perspective on the Apollo Program.
