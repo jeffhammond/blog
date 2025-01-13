@@ -87,8 +87,11 @@ GCC |  | 0 | 1
 IFX |  | 0 | -1 (`0xFFFFFFFF`)
 IFX | `-fpscomp logicals` | 0 | 1
 NVHPC |  | 0 | -1 (`0xFFFFFFFF`)
-LLVM (`flang-new`) |  | 0 | -1 (`0xFFFFFFFF`)
+LLVM 14 (`flang-new`) |  | 0 | -1 (`0xFFFFFFFF`)
+LLVM 20 (`flang-new`) |  | 0 | 1
 Cray |  | 0 | 1
+
+I did not probe when in the LLVM version history the values of logical changed to match C.
 
 Here's more fun data:
 
@@ -98,8 +101,9 @@ GCC |  | F & ! T | T & ! F | T & ! T | T & ! T
 IFX |  | F & ! T | T & ! F | T & ! F | F & ! T
 IFX | `-fpscomp logicals` | F & ! T | T & ! F | T & ! F | T & ! F
 NVHPC |  | F & ! T | T & ! F | T & ! F | F & ! T
-LLVM (`flang-new`) |  | F & ! T | T & ! F | T & ! F | F & ! T
+LLVM 14 (`flang-new`) |  | F & ! T | T & ! F | T & ! F | F & ! T
 
+I didn't run this test for LLVM 20 or Cray.
 
 # Sentinels
 
