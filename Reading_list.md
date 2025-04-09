@@ -12,8 +12,6 @@ The Key to Nuclear Restraint by Thomas Jonter.
 
 Dark Sun: The Making of the Hydrogen Bomb, by Richard Rhodes.
 
-[The Illustrated Man](https://en.wikipedia.org/wiki/The_Illustrated_Man) by Ray Bradbury.
-
 # Planning to Read
 
 A Concise History of Finland by Kirby.
@@ -33,6 +31,8 @@ The Origins of Totalitarianism by Hannah Arendt.
 Sunburst and Luminary by Don Eyles.
 
 # Have Read
+
+[The Illustrated Man](https://en.wikipedia.org/wiki/The_Illustrated_Man) by Ray Bradbury.
 
 Chip War by Chris Miller.  Outstanding book on the current and past state of semiconductors.
 
