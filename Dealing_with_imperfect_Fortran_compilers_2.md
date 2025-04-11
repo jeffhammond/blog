@@ -10,7 +10,7 @@ you're living with right now.
 What we want to build here is a bridge between two Fortran compilers.
 The most general bridge is the standard C-Fortran interoperability (CFI)
 feature set found in Fortran 2018, but we will also describe
-a bridge that uses the implenentation-specific array descriptor
+a bridge that uses the implementation-specific array descriptor
 of the NVIDIA (nee PGI) Fortran compiler, because that was original
 motivation for this project.
 
