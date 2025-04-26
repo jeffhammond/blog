@@ -2,11 +2,11 @@ These are books I've read or am reading and which I have enjoyed.
 
 # Currently Reading
 
-Command and Control by Eric Schlosser.
+[Focus  – The ASML way](https://focus-dewereldvanasml.nl/) by Marc Hijink.
+
+Putin's People by Catherine Belton.
 
 A Line in the Sand by James Barr.
-
-[The Demon-Haunted World: Science as a Candle in the Dark](https://en.m.wikipedia.org/wiki/The_Demon-Haunted_World) by Carl Sagan.
 
 The Key to Nuclear Restraint by Thomas Jonter.
 
@@ -31,6 +31,10 @@ The Origins of Totalitarianism by Hannah Arendt.
 Sunburst and Luminary by Don Eyles.
 
 # Have Read
+
+Command and Control by Eric Schlosser.
+
+[The Demon-Haunted World: Science as a Candle in the Dark](https://en.m.wikipedia.org/wiki/The_Demon-Haunted_World) by Carl Sagan.
 
 [The Illustrated Man](https://en.wikipedia.org/wiki/The_Illustrated_Man) by Ray Bradbury.
 
