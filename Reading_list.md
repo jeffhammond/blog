@@ -32,6 +32,8 @@ Sunburst and Luminary by Don Eyles.
 
 # Have Read
 
+The Time Machine by H. G. Wells.
+
 Command and Control by Eric Schlosser.
 
 [The Demon-Haunted World: Science as a Candle in the Dark](https://en.m.wikipedia.org/wiki/The_Demon-Haunted_World) by Carl Sagan.
