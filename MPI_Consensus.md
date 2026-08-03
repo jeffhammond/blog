@@ -162,4 +162,6 @@ fn_fail:
 
 Bit-wise comparison using `memcpy` works just fine for integers and strings, but may not always work for floating-point types.  Unfortunately, in the case of arbitrary datatypes, it's rather complicated to walk through every element and do a floating-point comparison using `fabs(in-out)<tolerance` for every scalar, so we omit that.
 
+The other issue with the generalized code above is that non-contiguous datatypes with different layouts but which pack to the same bit-wise representation will produce a true comparison, which might be counterintuitive.  However, I cannot think of a realistic scenario where this is a problem and there are cases where one might desire this behavior (one rank passes a column and another passes a row, for example, where treating them as equivalent vectors is valid).
+
 Do you find yourself writing MPI consensus in your code regularly?  How do you do it?  If your implementation is better than mine, please create an issue and tell me about it.
