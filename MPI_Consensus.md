@@ -4,22 +4,23 @@ An important property of consensus is that, for it to be true, every pairwise co
 
 Let's start with the simplest and probably fastest option for a scalar:
 ```c
-int MPIX_Consensus(int * input_value, int count, MPI_Datatype type, int * logical_result, MPI_Comm comm)
+int MPIX_Consensus(T * input_value, int count, MPI_Datatype type, int * logical_result, MPI_Comm comm)
 {
   if (!logical_result) return MPI_ERR_ARG;
 
   /* T is whatever C type corresponds to the MPI datatype,
      the implementation of which we omit here for simplicity */
-  T global_min_value = INT_MAX;
+  T global_value[2] = {INT_MAX,INT_MIN};
+  T local_value[2] = {input_value,-inputvalue};
 
-  int rc = MPI_Allreduce(&input_value, &global_min_value, 1, type, MPI_MIN, comm);
+  int rc = MPI_Allreduce(local_value, global_min_value, 2, type, MPI_MIN, comm);
   if (rc != MPI_SUCCESS) return rc;
 
-  *logical_result = (input_value == global_min_value);
+  *logical_result = (input_value == global_value[0] && -input_value == global_value[1]);
   return MPI_SUCCESS;
 }
 ```
-This implementation can be done with `MPI_MAX` just as easily.  The performance is ideal for scalar datatypes because the logical result of any comparison has the same communication cost as the datatype used in the reduction (I am not aware of a network where 1 bit is cheaper to move than the 16 bytes in the largest real scalar MPI supports).
+This implementation can be done with `MPI_MAX` just as easily.  The performance is ideal for scalar datatypes because the logical result of any comparison has the same communication cost as the datatype used in the reduction (I am not aware of a network where 1 bit is cheaper to move than the 32 bytes in the largest real scalar MPI supports).
 
 The above code works for integer and real floating-point types supported by MPI, but it doesn't support complex numbers.  For those, one would just treat a scalar as two real numbers and the comparison is the same.  The implementation of this is left as an exercise for the reader.
 
