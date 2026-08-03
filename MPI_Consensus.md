@@ -8,7 +8,8 @@ int MPIX_Consensus(int * input_value, int count, MPI_Datatype type, int * logica
 {
   if (!logical_result) return MPI_ERR_ARG;
 
-  /* T is whatever C type corresponds to the MPI datatype, the implementation of which we omit here for simplicity */
+  /* T is whatever C type corresponds to the MPI datatype,
+     the implementation of which we omit here for simplicity */
   T global_min_value = INT_MAX;
 
   int rc = MPI_Allreduce(&input_value, &global_min_value, 1, type, MPI_MIN, comm);
@@ -72,7 +73,8 @@ int MPIX_Consensus(void* input, int count, MPI_Datatype datatype,
     rc = MPI_Type_size(datatype, &type_size);
     if (rc != MPI_SUCCESS) goto fn_fail;
 
-    /* this only happens if type_size = MPI_UNDEFINED, which means we have a large-count issue */
+    /* this only happens if type_size = MPI_UNDEFINED,
+       which means we have a large-count issue */
     if (type_size < 0) {
         rc = MPI_ERR_TYPE;
         goto fn_fail;
