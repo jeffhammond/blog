@@ -34,6 +34,14 @@ Sunburst and Luminary by Don Eyles.
 
 1873 by Liaquat Ahamed.
 
+The First Three Minutes by Steven Weinberg.
+
+Black Holes and Time Warps by Kip Thorne.  One of my all-time favorites.
+
+[What If?: Serious Scientific Answers to Absurd Hypothetical Questions](https://en.wikipedia.org/wiki/What_If%3F_(book)).
+
+What If? 2 by Randall Munroe.
+
 A Short History of Finland by Jonathan Clements.
 
 The Time Machine by H. G. Wells.
@@ -51,8 +59,6 @@ The Right Stuff by Tom Wolfe.
 The NVIDIA Way by Tae Kim.
 
 [The Strangest Man: The Hidden Life of Paul Dirac, Quantum Genius](https://en.wikipedia.org/wiki/The_Strangest_Man).
-
-[What If?: Serious Scientific Answers to Absurd Hypothetical Questions](https://en.wikipedia.org/wiki/What_If%3F_(book)).
 
 The Last Empire by Serghii Plokhy.
 
