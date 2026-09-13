@@ -34,6 +34,8 @@ Sunburst and Luminary by Don Eyles.
 
 1873 by Liaquat Ahamed.
 
+A Short History of Finland by Jonathan Clements.
+
 The Time Machine by H. G. Wells.
 
 Command and Control by Eric Schlosser.
