@@ -3,6 +3,8 @@
 *Edited narrative based on the MUG Day 3 talk and audience Q&A*  
 [Watch the original recording](https://www.youtube.com/watch?v=Hf2z2rmYFkI)
 
+AI edited this so it's not exactly my voice, but it's better than nothing, and I haven't had time to write a better version manually.
+
 ## What I wanted to learn
 
 The good news is that none of us are out of a job. If anything, working with coding agents has made my job much more interesting.
@@ -13,25 +15,27 @@ There was only one sensible way to do that: use it on problems where I already k
 
 That expertise matters because agentic development works only until the agent gets stuck or heads in the wrong direction. At that point, a human has to understand the problem well enough to intervene. The experience reminds me of working with talented interns: much of the time, you can give them a goal and iterate quickly, but sometimes you have to sit down with them, explain the missing concept, and guide them through the next step.
 
-I primarily used Claude and OpenAI Codex. I found their capabilities broadly comparable, with some differences in cost and terminal interaction, but the effective working practices were essentially the same. The most important operational lesson was to give the agent an isolated environment in which it could work freely. If every action requires manual approval, you spend all your time pressing "yes." I used a container, kept it away from files I could not afford to lose, and let it run. I could say, "Work on message rate; I am going to bed," and return in the morning to find that it had spent several hours testing and improving the implementation.
+I primarily used Claude and OpenAI Codex. They are generally the same, with some differences in cost and terminal interaction, although I find Claude slightly better for the hardest problems. No matter what agent you use, don't waste time telling it "yes" every time it needs permission.  Create a Docker sandbox with all your dependencies in it and use that in "YOLO" mode.  This allowed me to let the agent work autonomously for long periods of time, e.g., "work on message rate; I am going to bed," and return in the morning to find that it had spent several hours testing and improving the implementation.
+
+_Editor's note: I now find that Claude "auto" mode is sufficient, i.e. `--dangerously-skip-permissions` is no longer required to be productive._
 
 ## Why MPI was the right experiment
 
-I called the project **Vibe MPI**, although it was not really vibe coded. The name survived because it was provocative and I was too lazy to invent another one. In practice, I did a substantial amount of design, testing, and debugging.
+I called the project **VibeMPI**, although it was not really vibe coded. The name survived because it was provocative and I was too lazy to find another name. In practice, I did a substantial amount of design, testing, and debugging.
 
 My day job is in NVIDIA's NCCL team, where I am interested in whether agents can help develop communication software for NCCL, NVSHMEM, and related systems. MPI was the best way to evaluate that question because it is the gold standard for communication software. It has a formal specification, several high-quality open-source implementations, vendor-optimized implementations that can serve as performance references, and a large collection of tests.
 
 Even with all those resources, the MPI specification alone is not sufficient to create an implementation with an agent. It is an excellent specification for humans who share decades of context, but it is not a machine-readable implementation recipe, nor should it be. The existing tests are valuable, but they are not sufficient either.
 
-Agentic development is, in my experience, a form of test-driven development. Without tests, you have nothing. Anything that is not tested is probably wrong, sometimes in ways a human expert would never anticipate. At one point, the agent allocated eight gigabytes of eager buffers because doing so improved a benchmark. No MPI graduate student or experienced developer would need to be told why that is unacceptable, but the agent happily optimized the objective it had been given.
+Agentic development is, in my experience, a form of test-driven development. Without tests, you have nothing. Anything that is not tested is probably wrong, sometimes in ways a human expert would never anticipate. At one point, the agent allocated 8GB of eager buffers because doing so improved a benchmark. No MPI graduate student or experienced developer would need to be told why that is unacceptable, but the agent happily optimized the objective it had been given.
 
 ## Building a foundation of MPI knowledge
 
-I began by assembling a large body of MPI material: mailing-list archives, papers, existing implementations, and test suites. Downloading all of it even got me temporarily banned by my internet service provider.
+Before I started working on VibeMPI, I began by assembling a large body of MPI material: mailing-list archives, papers, existing implementations, and test suites. Downloading all of it even got me temporarily banned by my internet service provider.
 
 I did not put an artificial wall between the agent and the source code for MPICH or Open MPI. The agent was allowed to read those implementations, including their comments and design choices. It could not simply copy them because Vibe MPI was written in modern C++, but it could learn from them. That is consistent with how the MPI community has always worked. The implementations use permissive licenses, and reading code is often the only way to understand techniques that were never fully documented in papers.
 
-I also biased the knowledge base toward sources I trusted. A random statement on a mailing list should not carry the same weight as work from established MPI experts. Agents can become fixated on a confidently written but incorrect comment, so curation matters.
+I also biased the AI knowledge base toward sources I trusted. A random statement on a mailing list should not carry the same weight as work from established MPI experts. Agents can become fixated on a confidently written but incorrect comment, so curation matters.
 
 My first experiment was to have the agent write a book about MPI. It produced a mediocre book that could probably be turned into a decent one, but writing prose about MPI does not demonstrate a real understanding of MPI. As Feynman's dictum suggests, if you cannot build it, you do not truly understand it. I therefore decided to build an MPI implementation instead. That would test both the agent and me.
 
@@ -45,7 +49,7 @@ Message matching was the hardest part. Despite MPI's enormous API surface, recei
 
 I made no attempt to compete with production implementations on portability or backward compatibility. Vibe MPI uses C++20 and the standard library extensively. Some choices were too optimistic -- `std::vector`, for example, is not necessarily ideal for eager buffers -- but modern C++ saved a great deal of work that would otherwise have gone into recreating basic infrastructure in C.
 
-I wanted broad feature coverage, including less popular features such as `MPI_THREAD_MULTIPLE` and remote memory access. The library was compatible with the MPI ABI from the beginning because it used the MPI ABI stubs header as its `mpi.h`.
+I wanted broad feature coverage, including less popular features such as `MPI_THREAD_MULTIPLE` and remote memory access. The library was compatible with the MPI ABI from the beginning because it used the [MPI ABI stubs header](https://github.com/mpi-forum/mpi-abi-stubs) as its `mpi.h`.
 
 The configure-compile-test loop turned out to be critical. An agent can generate code far faster than a person, which means build and test latency quickly becomes the bottleneck. I personally dislike CMake, but CMake with Ninja made this loop dramatically faster than an Autotools-based build. More importantly, the agent was good enough at writing and debugging CMake that I rarely had to become involved. I am happy to use a tool I dislike when the agent can handle it reliably.
 
@@ -55,7 +59,7 @@ The first transports were shared memory and TCP. I later added OFI and UCX simpl
 
 I began the implementation on May 26, 2026. By June 15, Vibe MPI had working single-node TCP and shared-memory transports and passed the applicable MPICH tests, along with many others. It was not perfect, but it was already a credible MPI implementation.
 
-I worked intensely: seven days a week, checking the agent first thing in the morning and again before going to bed. I did not work around the clock, but the agent often did. During one month I reached my $10,000 usage limit on the twenty-eighth day. My estimate is that Vibe MPI consumed about $25,000 in model tokens. That is a substantial personal expense, but it is small by industrial software-development standards and perhaps a thousand times less than the estimated cost of developing a conventional production MPI implementation.
+I worked grad student hours: seven days a week, checking the agent first thing in the morning and again before going to bed. I did not work around the clock, but the agent often did. During one month I reached my $10,000 usage limit on the twenty-eighth day. My estimate is that Vibe MPI consumed about $25,000 in model tokens. That is a substantial personal expense, but it is small by industrial software-development standards and perhaps a thousand times less than the estimated cost of developing a conventional production MPI implementation.
 
 After returning from vacation, I gained access to an InfiniBand system through the HPC Advisory Council cluster. Real multi-node testing exposed many bugs that virtual-node TCP testing had not. I brought TCP, OFI, and UCX to multi-node operation in a little over a week, including launcher work and the usual InfiniBand wire-up issues.
 
