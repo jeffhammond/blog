@@ -57,8 +57,11 @@ No HPC workload, whether simulation, data analysis or AI, looks anything like th
 Your Scores Rated:
 
 15 : liar (did you see the caveat of “credibly”??)
+
 10-14 : Fire - either unusually battle hardened across HPC aspects, or spectacular HPC BS gamer, or are an AI model
+
 5-9 : Earth - perfect panel member, covers a range of topics well, but doesn’t pretend to know everything!
+
 0-4 : Water - could be in marketing? (😜) or specialist who knows one area really deeply, or what our HPC community always needs ie fresh talent with new ideas unencumbered by history?
 
 How did you score?
